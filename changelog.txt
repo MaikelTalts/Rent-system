@@ -1,0 +1,149 @@
+1.3.2018 - Versio [0.6.0]
+      - Lainan kirjurin valinta lisätty. Poimitaan jatkossa sisäänkirjautuneen käyttäjän ID automaattiesti.
+      - bugi korjauksia JS ja front end puolella.
+
+1.3.2018 - Versio [0.5.9]
+      - Lainan muokkauksen aikavalinta lisätty.
+      - Lainan muokkauksen lainattavien laitteiden poisto lisätty.
+      - Lainan muokkauksen lainan kuvauksen muokkaus lisätty.
+      - Lainausjärjestelmän ohjeet lisätty.
+      - Lainan lainaajavalinta lisätty.
+      - Uuden lainaajan lisääminen lainan luonnin yhteydessä lisätty.
+
+28.2.2018 - Versio [0.5.8]
+      - Lainan muokkaus aikavalinta (korin tuotteiden päivät tulee suodattaa pois poislukien kyseisen lainan päivät.)
+      - Laitteiden poisto lainoista (Viimeinen laite poistaa koko lainan).
+
+28.2.2018 - Versio [0.5.7]
+      - Lainan muokkaus (aikavalinta lähes valmis)
+
+27.2.2018 - Versio [0.5.6]
+      - Vanhojen lainojen tulostus muutettu 10kpl + 10kpl / [Näytä Lisää] painike.
+      - Myöhästyneiden ja vanhojen lainojen tietojen muokkauksen esto lisätty.
+
+26.2.2018 - Versio [0.5.5]
+      - Lainan luonti, peruutus ja poisto ilmoitukset lisätty.
+      - Lisävarusteiden ja ohjelmien linkitysmuutoksia koskevat ilmoitukset lisätty.
+
+26.2.2018 - Versio [0.5.4]
+      - Lainojen listaus laite ja lainaaja modaaleihin lisätty, sekä listauksesta siirtyminen kyseisen lainan modaaliin lisätty.
+
+26.2.2018 - Versio [0.5.3]
+      - Vanhojen lainausten poisto lisätty.
+      - Uusien luotujen lainojen appendaus (tulostus) Aktiivisiin ja Tuleviin lainoihin lisätty.
+      - Lainauskorin tyhjentäminen lainauksen luomisen jälkeen lisätty.
+
+25.2.2018 - Versio [0.5.2]
+      - Laina-aika valitsinta korjattu uutta lainaa kirjatessa laina-aika, ei enää ole rajattu edellisen lainan mukaisesti.
+      - Lainojen peruutus lisätty.
+      - Lainausten palautetuksi kirjaaminen [Myöhästyneistä] ja [Nykyisistä] lisätty. Laina siirretään menneisiin lainauksiin.
+
+25.2.2018 - Versio [0.5.1]
+      - [Nykyiset lainaukset] paneeliin lisätty aktiivisten lainausten listaus (Lainanumero, Lainaaja, Laina-aika).
+      - [Vanhat lainaukset] paneeliin lisätty vanhojen lainausten listaus (Lainanumero, Lainaaja, Laina-aika).
+      - Laitteet, Lainaajat, Admin sivujen lisäyspaneelit värjätty.
+      - Lainaukset sivun paneelit värjätty.
+
+25.2.2018 - Versio [0.5.0]
+      - Lainakoriin listattujen tuotteiden listaaminen rentList tauluun lisätty
+      - Lainan kuvaukselle/kommentoinnille lisätty tekstikenttä.
+      - Lainaukset välilehteen lisätty [Myöhästyneet], [Nykyiset], [Tulevat], [Menneet] lainauspaneelit.
+      - [Myöhästyneet lainaukset] paneeliin lisätty myöhässä olevien lainausten listaus (Lainanumero, Lainaaja, Laina-aika).
+      - [Tulevat lainaukset] paneeliin lisätty myöhässä tulevien lainausten listaus (Lainanumero, Lainaaja, Laina-aika).
+      - [Merkitse palautetuksi], [Muuta lainausta], [Peruuta Lainaus], [Poista lainaus] painikkeet lisätty lainan muokkausmodaaliin.
+
+24.2.2018 - Versio [0.4.9]
+      - deleteRentBasket painikkeen väri vaihdettu punaiseksi.
+      - Laina-aika valinta lisätty.
+      - Lainauskoripainikkeen [#rentBasketLabel] lisäys ja poistolaskenta lisätty.
+      - Mainpage.php tabit "justifioitu" = keskitetty
+      - Lainan lisäys rent tauluun lisätty.
+
+19.2.2018 - Versio [0.4.8]
+      - Statuksen lisäys tietokantaan lisätty.
+      - Statuksen poisto lisätty.
+      - Statuksen muokkaus lisätty.
+      - Lainauskorin [Lainausmodaali] lisätty.
+      - Laitteiden lisäys lainauskoriin lisätty.
+      - Laitteiden poisto lainauskorista lisätty.
+
+16.2.2018 - Versio [0.4.7]
+      - Kategorian poisto lisätty.
+      - Kategorian muokkaus lisätty.
+
+15.2.2018 - Versio [0.4.6]
+      - Laitekategorioiden ja laitestatusten listaus productTab.php sivulle omaan pudotuspaneeliin lisätty.
+      - Laitekategorian lisäys tietokantaan lisätty.
+      - JavaScript kommentoitu kokonaan.
+
+14.2.2018 - Versio [0.4.5]
+      - Laitestatus lisätty [Lisää uusi laite] pudotuspaneeliin.
+
+12.2.2018 - Versio [0.4.4]
+      - Lisäys, poisto ja muutosilmoitukset lisätty.
+
+12.2.2018 - Versio [0.4.3]
+      - Laitteiden, lainaajien ja adminien tulostus muutettu aakkosjärjestykseen.
+      - editCustomer bugeja korjattu.
+      - frontTab.php poistettu
+
+12.2.2018 - Versio [0.4.2]
+      - Ohjelmien muokkaus productTab.php ja deviceModal.php lisätty.
+      - Ohjelmien linkitys tuotteisiin ja linkityksen poisto lisätty.
+      - Mainpage.php sivulta piilotettu lainauskori (col-lg-3) ja tabien col koko kasvatettu 12 [koko leveys].
+      - Laitteet, lainaaja & admin sivujen dropdown valikkojen otsikkojen kokoa suurennettu.
+
+12.2.2018 - Versio [0.4.1]
+      - Admin modaali lisätty.
+      - Adminin poisto lisätty.
+      - Adminin muokkaus lisätty.
+
+12.2.2018 - Versio [0.4.0.5]
+      - Koodin kommentointia lisätty.
+
+11.2.2018 - Versio [0.4]
+      - Laitteisiin linkitettävien ohjelmien tulostus [Lisää uusi laite] --> [Ohjelmat listaan] lisätty.
+      - Ohjelmien lisäys productTab.php ja deviceModal.php lisätty
+      - Ohjelmien poisto productTab.php ja deviceModal.php lisätty
+      - changelog.txt tiedoston versiomuutoksien suunta vaihdettu.
+
+11.2.2018 - Versio [0.3.9]
+      - Tuotteen lisäyksen yhteydessä, tuotteeseen linkitettyjen lisävarusteiden korjaus. Jos linkitettyjä lisävarusteita ei ollut ollenkaan, tuotetta ei appendattu productTab.php:lle
+      - Lisävarusteen muokkaus deviceModaliin lisätty.
+      - Lisävarusteen linkittäminen tuotteeseen ja tuotelinkityksen poisto laitemodaalin kautta lisätty.
+      - Tuotteisiin yhdistettyjen lisävarusteiden tulostus checked muodossa lisätty.
+
+8.2.2018 - Versio [0.3.8]
+      - Uuden lisävarusteen lisääminen tulostaa nyt molempiin mainpage.php -> productTab.php sivulle, sekä modaaliin, jos se on auki ja luonti on tehty sitäkautta.
+      - Lisävarusteiden yhdistäminen tuotteisiin, uutta tuotetta lisättäessä.
+      - Tuottetta poistaessa poistetaan myös accessoryLine tietokantataulusta kaikki rivit, joissa esiintyvät poistettavan tuotteen ID.
+
+7.2.2018 - Versio [0.3.7]
+      - Lisävarustepudotusvalikkoon lisätty text input kenttä, joka on oletuksena [display:hidden].
+      - Lisävarustepudotusvalikon [Muokkaa] ja [tallenna] painikkeiden visuaalinen toimivuus lisätty.
+      - Lisävarustepudotusvalikon lisävarusteiden poiston toiminta lisätty.
+      - Lisävarustepudotusvalikoon lisätty rivi, jossa text input, sekä [lisää] painike.
+      - Lisävarustepudotusvalokon [Lisää] painikkeen toiminnallisuus lisätty. Käyttäjän syöttäessä lisävarusteen nimen, ja klikatessa [lisää] painiketta, lisävaruste lisätään tietokantaan, sekä visuaalisesti suoraan sivulle.
+
+5.2.2018 - Versio [0.3.6]
+      - Lainaajien puhelinnumero sarake poistettu [customerTab.php] sivulta. Myös uuden lainaajan lisäyksestä ja muokkauksesta, (turha sarake).
+      - Lisävarustepudotusvalikko lisätty [productTab.php] sivulle, ja lisävarusteiden tulostus lisätty taulukkomuodossa kyseiseen pudotusvalikkoon.
+      - Ohjelmapudotusvalikko lisätty [pruductTab.php] sivulle.
+
+5.2.2018 - Versio [0.3.5]
+      - adminTab lisätty mainpage.php pääsivulle.
+      - Admin tietokantataulun tulostus adminTab sivulle.
+      - Uuden admin tunnuksen lisääminen.
+      - Laite-, käyttäjä- ja admintunnuksien lisäyksen esto input kenttien ollessa tyhjä tai sisältäessä vain välilyöntejä.
+
+3.2.2018 - Versio [0.3.4]
+      - Lainaajien poisto tietokannasta ajaxilla.
+      - Laitteiden muokkausmodaaliin lisätty status valitsin.
+      - Laitteiden lajittelu kategorian mukaan lisätty.
+      - Laitteiden jaottelu statuksen mukaan lisätty.
+
+2.2.2018 - Versio [0.3.3]
+      - Laitteiden muokkausmodaali on visuaalisesti, sekä toiminnallisesti valmis [ajax].
+      - Lainattavien laitteiden lisääminen tietokantaan ajaxilla valmis.
+      - Uuden lainaajan lisääminen [customerTab] välilehdellä valmis [ajax].
+      - Lainaajien muokkausmodaali on visuaalisesti, sekä toiminnallisesti valmis [ajax].

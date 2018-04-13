@@ -1,0 +1,499 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="Language" content="fi" />
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+  <body>
+
+    <div class="container">
+
+      <style>
+    *       {
+        box-sizing: border-box;
+      }
+
+        #myInput {
+          background-image: url('/css/searchicon.png');
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 100%;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+      }
+
+        #myTable {
+          border-collapse: collapse;
+          width: 100%;
+          border: 1px solid #ddd;
+          font-size: 18px;
+      }
+
+        #myTable th, #myTable td {
+          text-align: left;
+          padding: 12px;
+        }
+
+        #myTable tr {
+          border-bottom: 1px solid #ddd;
+      }
+
+        #myTable tr.header, #myTable tr:hover {
+          background-color: #f1f1f1;
+      }
+    </style>
+
+      <div class="row">
+
+        <div class= "col-mg-2">
+
+          <div class="container">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              tuote menu
+            </button>
+
+            <div class="dropdown-menu" id= "">
+              <!-- Listataan kaikki tuoteryhmät -->
+              <a class="dropdown-item" >Normal</a>
+              <a class="dropdown-item" >Testi</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      <div class= "col-mg-2">
+
+        <div class="container">
+          <!-- aloitetaan lainaajan halinta modul-->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            lainaajan halinta
+          </button>
+
+          <!-- The Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">lainaajan halinta</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+
+                    <div class="container">
+
+                      <div id="accordion">
+
+                        <div class="card">
+
+                          <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                              testi 3
+                            </a>
+                          </div>
+                          <div id="collapseThree" class="collapse">
+                            <div class="card-body">
+
+                              <!-- Sisäinen teible ominausuus joka tule eesii cort painaessa -->
+                              <table class="table">
+
+                                <table class="table">
+
+                                  <thead>
+
+                                    <tr>
+                                      <th>Firstname</th>
+                                      <th>Lastname</th>
+                                      <th>Email</th>
+                                    </tr>
+
+                                  </thead>
+
+                                  <tbody>
+
+                                    <tr>
+                                      <td>John</td>
+                                      <td>Doe</td>
+                                      <td>john@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Mary</td>
+                                      <td>Moe</td>
+                                      <td>mary@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>July</td>
+                                      <td>Dooley</td>
+                                      <td>july@example.com</td>
+                                    </tr>
+
+                                  </tbody>
+
+                                </table>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="card">
+
+                          <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                              testi 3
+                            </a>
+                          </div>
+                          <div id="collapseThree" class="collapse">
+                            <div class="card-body">
+
+                              <!-- Sisäinen teible ominausuus joka tule eesii cort painaessa -->
+                              <table class="table">
+
+                                <table class="table">
+
+                                  <thead>
+
+                                    <tr>
+                                      <th>Firstname</th>
+                                      <th>Lastname</th>
+                                      <th>Email</th>
+                                    </tr>
+
+                                  </thead>
+
+                                  <tbody>
+
+                                    <tr>
+                                      <td>John</td>
+                                      <td>Doe</td>
+                                      <td>john@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Mary</td>
+                                      <td>Moe</td>
+                                      <td>mary@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>July</td>
+                                      <td>Dooley</td>
+                                      <td>july@example.com</td>
+                                    </tr>
+
+                                  </tbody>
+
+                                </table>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="card">
+
+                          <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                              testi 3
+                            </a>
+                          </div>
+                          <div id="collapseThree" class="collapse">
+                            <div class="card-body">
+
+                              <!-- Sisäinen teible ominausuus joka tule eesii cort painaessa -->
+                              <table class="table">
+
+                                <table class="table">
+
+                                  <thead>
+
+                                    <tr>
+                                      <th>Firstname</th>
+                                      <th>Lastname</th>
+                                      <th>Email</th>
+                                    </tr>
+
+                                  </thead>
+
+                                  <tbody>
+
+                                    <tr>
+                                      <td>John</td>
+                                      <td>Doe</td>
+                                      <td>john@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>Mary</td>
+                                      <td>Moe</td>
+                                      <td>mary@example.com</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>July</td>
+                                      <td>Dooley</td>
+                                      <td>july@example.com</td>
+                                    </tr>
+
+                                  </tbody>
+
+                                </table>
+
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class= "col-mg-2">
+
+          <div class="container">
+            <!-- aloitetaan laite halinta modul-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              laiteitten halinta
+            </button>
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">laiteitten halinta</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- tähän tulee laajennus ja table ominaisuus -->
+                    <div class="modal-body">
+                      Testi.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class= "col-mg-2">
+
+          <div class="container">
+            <!-- aloitetaan laite halinta modul-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              kayttäjän hallinta
+            </button>
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">kayttäjän hallinta</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- tähän tulee laajennus ja table ominaisuus -->
+                    <div class="modal-body">
+                      Testi.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class= "col-mg-2">
+
+          <div class="container">
+            <!-- aloitetaan laite halinta modul-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              lainaus kori
+            </button>
+
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">lainaus kori </h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <!-- tulisi  -->
+                      Testi.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class= "col-mg-2">
+
+          <botton type=botton class="btn btn-secondary">kirjaudu ulos</button>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col -mg-12">
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col -mg-12">
+
+          <table id="myTable">
+
+            <tr class="header">
+              <th style="width:10%;">tuotenumero</th>
+              <th style="width:40%;">tuote</th>
+            </tr>
+
+              <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Germany</td>
+              </tr>
+
+              <tr>
+                <td>Berglunds snabbkop</td>
+                <td>Sweden</td>
+              </tr>
+
+              <tr>
+                <td>Island Trading</td>
+                <td>UK</td>
+              </tr>
+
+              <tr>
+                <td>Koniglich Essen</td>
+                <td>Germany</td>
+              </tr>
+
+              <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Canada</td>
+              </tr>
+
+              <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Italy</td>
+              </tr>
+
+              <tr>
+                <td>North/South</td>
+                <td>UK</td>
+              </tr>
+
+              <tr>
+                <td>Paris specialites</td>
+                <td>France</td>
+              </tr>
+
+            </table>
+
+          </div>
+        </div>
+
+        <script>
+
+            function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                  if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                    } else {
+                      tr[i].style.display = "none";
+                    }
+                  }
+                }
+              }
+          </script>
+
+    </div>
+
+  </body>
+
+</html>

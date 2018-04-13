@@ -1,0 +1,263 @@
+/* Login ruudun kirjautumiskenttä keskelle ikkunaa */
+.login {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius:10px;
+  background-color:#f8f8fa;
+  padding:30px;
+}
+
+body, html{
+  height:100%;
+}
+
+.bg{
+  height:100% !important;
+  background:url("../loginBackground.jpg") !important;
+  background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#background{
+  background:#FFF;
+}
+
+.login-header {
+  text-align:center;
+}
+
+.field-wrap {
+  margin-top:10px;
+}
+
+.bottom-buffer {
+  padding-bottom:10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.pseudolink {
+    cursor:pointer;
+    color:#007bff;
+    text-decoration:none;
+   }
+.pseudolink:hover {
+    color:#0056b3;
+}
+
+/* Laitteet & Lainaajat välilehtien hakukenttä, sekä taulukkotyylittely */
+.searchInput {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.searchTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+.searchTable th, .searchTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+.searchTable tr {
+  /*background-color: #fff; */
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.searchTable tr.header, .searchTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.categoryFilter{
+  display: none;
+}
+
+.statusFilter{
+  display: none;
+}
+
+/* Oletuksena productTab:ssa olevat lisävarusteisiin liittyvät ylimääräiset elementit piilotetaan*/
+.accessoryConfirmClass, .accessoryInputClass, .accessoryCancelClass{
+  display:none;
+}
+
+/* Oletuksena modaalissa olevat lisävarusteisiin liittyvät ylimääräiset elementit piilotetaan*/
+.modalAccessoryConfirmClass, .modalAccessoryInputClass, .modalAccessoryCancelClass{
+  display:none;
+}
+
+/* Oletuksena productTab:ssa olevat ohjelmiin liittyvät ylimääräiset elementit piilotetaan*/
+.programConfirmClass, .programInputClass, .programCancelClass{
+  display:none;
+}
+
+/* Oletuksena modaalissa olevat ohjelmiin liittyvät ylimääräiset elementit piilotetaan*/
+.modalProgramConfirmClass, .modalProgramInputClass, .modalProgramCancelClass{
+  display:none;
+}
+
+.categoryConfirmClass, .categoryInputClass, .categoryCancelClass{
+  display:none;
+}
+
+.statusConfirmClass, .statusInputClass, .statusCancelClass{
+  display:none;
+}
+
+.deleteRentBasket{
+  display:none;
+}
+
+.card{
+  border-radius: 0px;
+}
+
+.rentLink{
+  text-decoration: none !important;
+}
+.rentLink:hover{
+  color:#e5e5e5 !important;
+}
+
+.cardHeaderText{
+  text-decoration: none !important;
+}
+
+.card-header{
+  border-radius:0px !important;
+}
+
+.modal{
+  overflow-y:scroll;
+}
+
+.selectProductButtons{
+  margin:30px;
+  margin-top:10px;
+}
+
+
+.infoMargin{
+  margin-bottom: 10px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.pseudolink_2 {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.pseudolink_2:hover {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
+
+/* == == == == == == == == == == == == == == == == == == == == == == ILMOITUKSET == == == == == == == == == == == == == == == == == == == == == ==*/
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+   visibility: hidden; /* Hidden by default. Visible on click */
+   min-width: 250px; /* Set a default minimum width */
+   margin-left: -125px; /* Divide value of min-width by 2 */
+   background-color: #333; /* Black background color */
+   color: #fff; /* White text color */
+   text-align: center; /* Centered text */
+   border-radius: 2px; /* Rounded borders */
+   padding: 16px; /* Padding */
+   position: fixed; /* Sit on top of the screen */
+   z-index: 9999; /* Add a z-index if needed */
+   left: 50%; /* Center the snackbar */
+   bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+   visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+However, delay the fade out process for 2.5 seconds */
+   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+   from {bottom: 0; opacity: 0;}
+   to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+   from {bottom: 0; opacity: 0;}
+   to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+   from {bottom: 30px; opacity: 1;}
+   to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+   from {bottom: 30px; opacity: 1;}
+   to {bottom: 0; opacity: 0;}
+}
