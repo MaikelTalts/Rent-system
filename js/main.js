@@ -2,20 +2,6 @@
 
 //== == == == == == == == == == == == == == == == == == == == == == == GLOBAALIT MUUTTUJAT == == == == == == == == == == == == == == == == == == == == == == == //
 
-//JavaScript taulukkoon listatut järjestelmän antamat ilmoitukset.
-var ilmoitukset = [
-/*0*/               "Tuotelisäys onnistui!", "Lisää tuotenimi!", "Tuotelisäys epäonnistui!", "Laite poistettu!", "Laite muokattu!",
-/*5*/               "Lainaaja lisätty!", "Lainaaja poistettu!", "Lainaajaa muokattu!", "Admin lisätty!", "Admin poistettu!",
-/*10*/              "Adminia muokattu!", "Lisävaruste lisätty!", "Lisävaruste poistettu!", "Lisävarustetta muokattu!", "Ohjelma lisätty!",
-/*15*/              "Ohjelma poistettu!", "Ohjelma muokattu!", "Lisävaruste linkitetty tuotteeseen!", "Lisävarusteen linkitys poistettu!", "Ohjelma linkitetty tuotteeseen!",
-/*20*/              "Ohjelman linkitys poistettu!", "Laitemuokkaus epäonnistui!", "Lainaajan lisäys epäonnistui!", "Lainaajan poisto epäonnistui!", "Lainaajan muokkaus epäonnistui!",
-/*25*/              "Adminin lisäys epäonnistui!", "Adminin poisto epäonnistui!", "Adminin muokkaus epäonnistui", "Ohjelman lisäys epäonnistui!", "Ohjelman linkitys epäonistui!",
-/*30*/              "Adminin muokkaus onnistui!", "Lisävarusteen poisto epäonnistui!", "Laitteen poisto epäonnistui!", "Laitteen nimikenttä on tyhjä!", "Tyhjä etu- tai sukunimi kenttä",
-/*35*/              "Lisävarusteen nimikenttä on tyhjä", "Ohjelman nimikenttä on tyhjä", "Kategorian lisäys onnistui", "Kategorian nimikenttä on tyhjä", "Tuote lisätty lainauskoriin",
-/*40*/              "Uusi laina luotu!", "Lainan luominen epäonnistui!", "Lainan muokkaus onnistui!", "Lainan muokkaus epäonnistui!", "Laina peruutettu!",
-/*45*/              "Lainan peruutus epäonnistui!", "Lainan poisto onnistui!", "Lainan poisto epäonnistui"
-                  ];
-
 var days = [];
 var devices = [];
 var rentAppend;
@@ -332,18 +318,17 @@ $('#viewRentModal').on('click', '.deleteFromRent', function(){
   $(".modalRentLine").each(function() {
     lineCount++
   });
-  console.log(lineCount);
   if(lineCount > 1){
-  var answer = confirm('Haluatko varmasti poistaa tuotteen lainauksesta?');
-  if (answer) {
-    deleteProductFromRent(productID, rentID, 1)
-  }
+    var answer = confirm('Haluatko varmasti poistaa tuotteen lainauksesta?');
+    if (answer) {
+      deleteProductFromRent(productID, rentID, 1)
+    }
   }
   else{
-  var answer = confirm('Jos poistat lainan viimeisen tuotteen, koko laina poistetaan!');
-  if (answer) {
-    deleteProductFromRent(productID, rentID, 2)
-  }
+    var answer = confirm('Jos poistat lainan viimeisen tuotteen, koko laina poistetaan!');
+    if (answer) {
+      deleteProductFromRent(productID, rentID, 2)
+    }
   }
 });
 
@@ -360,7 +345,6 @@ $('#rents').on('click', '#loadMoreOldRents', function(){
       spawnMoreRents = spawnMoreRents + 20;
     },
     error:function(){
-      console.log("Särki");
     }
   });
 });
@@ -397,7 +381,6 @@ $('#viewRentModal').on('click', '.returnRent', function(){
           }
         },
         error:function(){
-          console.log("Särki");
         }
       });
     }
@@ -419,11 +402,10 @@ $('#viewRentModal').on('click', '.cancelRent', function(){
       success:function(data){
         $('#viewRentModal').modal("hide");
         $(incomingRentTR).remove();
-        showSnackbar(ilmoitukset[44]);
+        showSnackbar("Laina peruutettu!");
       },
       error:function(){
-        console.log("Särki");
-        showSnackbar(ilmoitukset[45]);
+        showSnackbar("Lainan peruutus epäonnistui!");
       }
     });
   }
@@ -445,11 +427,10 @@ $('#viewRentModal').on('click', '.deleteRent', function(){
       success:function(data){
         $('#viewRentModal').modal("hide");
         $(oldRentTR).remove();
-        showSnackbar(ilmoitukset[46]);
+        showSnackbar("Lainan poisto onnistui!");
       },
       error:function(){
-        console.log("Särki");
-        showSnackbar(ilmoitukset[47]);
+        showSnackbar("Lainan poisto epäonnistui");
       }
     });
   }
@@ -510,11 +491,10 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
          $('#rentBasketLabel').text("0");
       }
       }
-      showSnackbar(ilmoitukset[40]);
+      showSnackbar("Uusi laina luotu!");
       },
       error:function(){
-        console.log("Särki");
-        showSnackbar(ilmoitukset[41]);
+        showSnackbar("Lainan luominen epäonnistui!");
       }
     });
   }
@@ -532,14 +512,13 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
       data: ({accessoryID:accessoryID, productID:productID}),
       success:function(data){
         if(data.response=="Poistettu"){
-          showSnackbar(ilmoitukset[12]);
+          showSnackbar("Lisävaruste poistettu!");
         }
         if(data.response=="Lisätty"){
-          showSnackbar(ilmoitukset[11]);
+          showSnackbar("Lisävaruste lisätty!");
         }
       },
       error:function(){
-        console.log("Särki");
         showSnackbar("Muutos epäonnistui!");
       }
     });
@@ -560,7 +539,6 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
       success:function(data){
       },
       error:function(){
-        console.log("Särki");
       }
     });
   });
@@ -580,7 +558,6 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
           $('#productModal').modal("show");
         },
         error:function(){
-          console.log("Särki");
         }
       });
     });
@@ -590,7 +567,6 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
   Tiedostolle lähetetään klikatun lainaajan ID, ja tämä lähettää ajax palautteena modaalin, joka sisältää kaiken tiedon klikatusta lainaajasta (tekstikentissä).*/
     $('#customers').on("click",".viewCustomer", function(){
       var customerID = $(this).attr("value");
-      console.log("Moro");
       $.ajax({
         type: "POST",
         url: "selections/selectCustomer.php",
@@ -600,7 +576,6 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
           $('#customerModal').modal("show");
         },
         error:function(){
-          console.log("Särki");
         }
       });
     });
@@ -622,7 +597,6 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
           $('#adminModal').modal("show");
         },
         error:function(){
-          console.log("Särki");
         }
       });
     });
@@ -681,18 +655,16 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
           $('#deviceTable tr:first').after("<tr id='productTR_"+data.id+"' class='productTr' value='"+data.id+"'><td><span class='pseudolink viewProduct' id='productName_"+data.id+"' value='"+data.id+"'>"+data.productName+"</span> </td><td> <span id='productStatus_"+data.id+"'>"+data.status+"</span></td><td> <span id='productCategory_"+data.id+"'>"+data.category+"</span></td> <td>\
                                             <button id='deleteRentBasket_"+data.id+"' type='button' class='btn btn-primary deleteRentBasket'  value='"+data.id+"'>Poista</button>\
                                             <button id='addRentBasket_"+data.id+"' type='button' class='btn btn-primary addRentBasket' value='"+data.id+"'>Koriin</button> </td></tr>");
-          showSnackbar(ilmoitukset[0]);
+          showSnackbar("Tuotelisäys onnistui!");
 
         },
         error:function(){
-          console.log("Särki");
-          showSnackbar(ilmoitukset[2]);
+          showSnackbar("Tuotelisäys epäonnistui!");
         }
       });
     }
     else{
-      console.log("Tyhjää täynnä");
-      showSnackbar(ilmoitukset[1]);
+      showSnackbar("Lisää tuotenimi!");
     }
     });
 
@@ -716,16 +688,14 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
         data: ({firstName:firstName, lastName:lastName, phoneNumber:phoneNumber, email:email, password:password}),
         success:function(data){
           $('#adminTable tr:first').after("<tr id='adminTR_"+data.id+"'><td><span class='pseudolink viewAdmin' id='adminName_"+data.id+"' value='"+data.id+"'>"+data.firstName + " " + data.lastName +"</span> </td><td> <span id='adminPhoneNumber_"+data.id+"'>"+data.phoneNumber+"</span></td> <td> <span id='adminEmail_"+data.id+"'>"+data.email+"</span></td></tr>");
-          showSnackbar(ilmoitukset[8]);
+          showSnackbar("Admin lisätty!");
         },
         error:function(){
-          console.log("Särki");
-          showSnackbar(ilmoitukset[25]);
+          showSnackbar("Adminin lisäys epäonnistui!");
         }
       });
     }
     else{
-      Console.log("Tyhjää täynnä");
     }
     });
 
@@ -769,17 +739,15 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
               $(trAdminName).text(data.firstName + " " + data.lastName);
               $(trAdminPhoneNumber).text(data.phoneNumber);
               $(trAdminEmail).text(data.email);
-              showSnackbar(ilmoitukset[30]);
+              showSnackbar("Adminin muokkaus onnistui!");
             },
             error:function(){
-              console.log("Särki");
-              showSnackbar(ilmoitukset[27]);
+              showSnackbar("Adminin muokkaus epäonnistui");
             }
           });
         }
         else{
-          console.log("Etpäs muuta");
-          showSnackbar(ilmoitukset[34]);
+          showSnackbar("Tyhjä etu- tai sukunimi kenttä");
         }
         });
 
@@ -809,17 +777,15 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                   $(trCustomerName).text(data.firstName + " " + data.lastName);
                   $(trCustomerClassID).text(data.classID);
                   $(trCustomerEmail).text(data.email);
-                  showSnackbar(ilmoitukset[7]);
+                  showSnackbar("Lainaajaa muokattu!");
                 },
                 error:function(){
-                  console.log("Särki");
-                  showSnackbar(ilmoitukset[24]);
+                  showSnackbar("Lainaajan muokkaus epäonnistui!");
                 }
               });
             }
             else{
-              console.log("Etpäs muuta");
-              showSnackbar(ilmoitukset[34]);
+              showSnackbar("Tyhjä etu- tai sukunimi kenttä");
             }
             });
 
@@ -853,17 +819,15 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
           $(trProductName).text(data.deviceName);
           $(trProductStatus).text(data.status);
           $(trProductCategory).text(data.category);
-          showSnackbar(ilmoitukset[4]);
+          showSnackbar("Laite muokattu!");
         },
         error:function(){
-          console.log("Särki");
-          showSnackbar(ilmoitukset[21]);
+          showSnackbar("Laitemuokkaus epäonnistui!");
         }
       });
     }
     else{
-      console.log("Tyhjää täynnä");
-      showSnackbar(ilmoitukset[33]);
+      showSnackbar("Laitteen nimikenttä on tyhjä!");
     }
     });
 
@@ -884,16 +848,14 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#customerModal').modal("hide");
                         $(customerTR).remove();
-                        showSnackbar(ilmoitukset[6]);
+                        showSnackbar("Lainaaja poistettu!");
                       },
                       error:function(){
-                        console.log("Ei onnistu")
-                        showSnackbar(ilmoitukset[23]);
+                        showSnackbar("Lainaajan poisto epäonnistui!");
                       }
                     });
               }
               else{
-                console.log("Ei poistettu");
               }
     });
 
@@ -915,16 +877,14 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#adminModal').modal("hide");
                         $(adminTR).remove();
-                        showSnackbar(ilmoitukset[9]);
+                        showSnackbar("Admin poistettu!");
                       },
                       error:function(){
-                        console.log("Ei onnistu")
-                        showSnackbar(ilmoitukset[26]);
+                        showSnackbar("Adminin poisto epäonnistui!");
                       }
                     });
               }
               else{
-                console.log("Ei poistettu");
               }
     });
 
@@ -944,16 +904,14 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#productModal').modal("hide");
                         $(productTR).remove();
-                        showSnackbar(ilmoitukset[3]);
+                        showSnackbar("Laite poistettu!");
                       },
                       error:function(){
-                        console.log("Ei onnistu");
-                        showSnackbar(ilmoitukset[32]);
+                        showSnackbar("Laitteen poisto epäonnistui!");
                       }
                     });
               }
               else{
-                console.log("Ei poistettu");
               }
     });
 
@@ -965,12 +923,9 @@ function rentCalendarDays(devices){
         dataType: "json",
         data: ({devices:JSON.stringify(devices)}),
         success:function(data){
-          console.log("Onnistui");
           days = data;
-          console.log(days);
         },
         error:function(){
-          console.log("Ei onnistu");
         }
       });
 }
@@ -983,12 +938,9 @@ function rentEditCalendarDays(devices, rentID){
         dataType: "json",
         data: ({rentID: rentID, devices:JSON.stringify(devices)}),
         success:function(data){
-          console.log("Onnistui");
           days = data;
-          console.log(days);
         },
         error:function(){
-          console.log("Ei onnistu");
         }
       });
 }
@@ -1139,21 +1091,19 @@ function createNewCustomer(firstName, lastName, phoneNumber, email, classID){
     data: ({firstName:firstName, lastName:lastName, phoneNumber:phoneNumber, email:email, classID:classID}),
     success:function(data){
       $('#customerTable tr:first').after("<tr id='customerTR_"+data.id+"'><td><span class='pseudolink viewCustomer' id='customerName_"+data.id+"' value='"+data.id+"'>"+data.firstName + " " + data.lastName +"</span> </td><td> <span id='customerClassID_"+data.id+"'>"+data.classID+"</span></td><td> <span id='customerEmail_"+data.id+"'>"+data.email+"</span></td></tr>");
-      showSnackbar(ilmoitukset[5]);
+      showSnackbar("Lainaaja lisätty!");
       rentCustomer = data.id;
       $("#currentRentCustomer").attr("value", data.id);
     },
     error:function(){
-      console.log("Särki");
-      showSnackbar(ilmoitukset[22]);
+      showSnackbar("Lainaajan lisäys epäonnistui!");
     }
   });
   var testi = "Moro";
 
 }
 else{
-  console.log("Tyhjää täynnä");
-  showSnackbar(ilmoitukset[34]);
+  showSnackbar("Tyhjä etu- tai sukunimi kenttä");
 }
 }
 
@@ -1175,8 +1125,6 @@ function selectRentCustomer(customerID){
 
     },
     error:function(){
-      console.log("Särki");
-
     }
   });
 }
@@ -1194,11 +1142,8 @@ function showCustomer(name){
     success:function(data){
       $("#livesearch").html(data);
       $("#livesearch").css("margin-top","10px");
-      console.log("Toimii");
     },
     error:function(){
-      console.log("Särki");
-
     }
   });
 }
@@ -1234,10 +1179,8 @@ function deleteProductFromRent(productID, rentID, checkID){
       else{
         $(modalRentTR).remove();
       }
-      console.log(data.msg);
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
@@ -1293,7 +1236,6 @@ function updateRent(rentID, from, to, description){
       showSnackbar(data.success);
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
@@ -1314,7 +1256,6 @@ $.ajax({
       rentEditCalendarDays(devices, rentID);
   },
   error:function(){
-    console.log("Särki");
   }
 });
 }
@@ -1331,7 +1272,7 @@ function addNewAccessory(accessoryName, checkID){
     dataType: "json",
     data: ({accessoryName:accessoryName}),
     success:function(data){
-      showSnackbar(ilmoitukset[11]);
+      showSnackbar("Lisävaruste lisätty!");
       $('.accessoryList').append("<tr id='trAccessory_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control accessoryInputClass' id='accessoryInput_"+data.id+"'>\
@@ -1378,13 +1319,11 @@ function addNewAccessory(accessoryName, checkID){
     }
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
 else{
-  console.log("Tyhjää täynnä");
-  showSnackbar(ilmoitukset[35]);
+  showSnackbar("Lisävarusteen nimikenttä on tyhjä");
 }
 }
 
@@ -1401,7 +1340,7 @@ function addNewProgram(programName, checkID){
     dataType: "json",
     data: ({programName:programName}),
     success:function(data){
-      showSnackbar(ilmoitukset[14]);
+      showSnackbar("Ohjelma lisätty!");
       $('.programList').append("<tr id='trProgram_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control programInputClass' id='programInput_"+data.id+"'>\
@@ -1449,13 +1388,11 @@ function addNewProgram(programName, checkID){
     }
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
 else{
-  console.log("Tyhjää täynnä");
-  showSnackbar(ilmoitukset[36]);
+  showSnackbar("Ohjelman nimikenttä on tyhjä");
 }
 }
 
@@ -1472,7 +1409,7 @@ function addNewCategory(categoryName){
     data: ({categoryName:categoryName}),
     success:function(data){
       $('#newCategoryInput').val("");
-      showSnackbar(ilmoitukset[37]);
+      showSnackbar("Kategorian lisäys onnistui");
       $('.categoryList').append("<tr id='trCategory_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control categoryInputClass' id='categoryInput_"+data.id+"'>\
@@ -1496,13 +1433,11 @@ function addNewCategory(categoryName){
                                   $('#selectCategory').append("<option value='"+data.id+"' id='filterByCategory_"+data.id+"'>"+data.name+"</option>");
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
 else{
-  console.log("Tyhjää täynnä");
-  showSnackbar(ilmoitukset[38]);
+  showSnackbar("Kategorian nimikenttä on tyhjä");
 }
 }
 
@@ -1519,7 +1454,7 @@ function addNewStatus(statusName){
     data: ({statusName:statusName}),
     success:function(data){
       $('#newStatusInput').val("");
-      showSnackbar(ilmoitukset[37]);
+      showSnackbar("Statuksen lisäys onnistui");
       $('.statusList').append("<tr id='trStatus_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control statusInputClass' id='statusInput_"+data.id+"'>\
@@ -1543,13 +1478,11 @@ function addNewStatus(statusName){
                                   $('#selectStatus').append("<option value='"+data.id+"' id='filterByStatus_"+data.id+"'>"+data.status+"</option>");
     },
     error:function(){
-      console.log("Särki");
     }
   });
 }
 else{
-  console.log("Tyhjää täynnä");
-  showSnackbar(ilmoitukset[38]);
+  showSnackbar("Statuksen nimikenttä on tyhjä");
 }
 }
 
@@ -1569,7 +1502,7 @@ function deleteAccessory(accessoryID, checkID){
           data: {accessoryID:accessoryID},
           success:function(data){
             $(trAccessory).remove();
-            showSnackbar(ilmoitukset[12]);
+            showSnackbar("Lisävaruste poistettu!");
             if(checkID==2){
               $(trModalAccessory).remove();
             }
@@ -1578,13 +1511,11 @@ function deleteAccessory(accessoryID, checkID){
             }
           },
           error:function(){
-            console.log("Ei onnistu")
-            showSnackbar(ilmoitukset[31]);
+            showSnackbar("Lisävarusteen poisto epäonnistui!");
           }
         });
   }
   else{
-    console.log("Ei poistettu");
   }
 }
 
@@ -1603,7 +1534,7 @@ function deleteProgram(programID, checkID){
           data: {programID:programID},
           success:function(data){
             $(trProgram).remove();
-            showSnackbar(ilmoitukset[15]);
+            showSnackbar("Ohjelma poistettu!");
             if(checkID==2){
               $(trModalProgram).remove();
             }
@@ -1612,14 +1543,12 @@ function deleteProgram(programID, checkID){
             }
           },
           error:function(){
-            console.log("Ei onnistu")
-            showSnackbar(ilmoitukset[28]);
+            showSnackbar("Ohjelman poisto epäonnistui");
           }
         });
 
   }
   else{
-    console.log("Ei poistettu");
   }
 }
 
@@ -1635,11 +1564,11 @@ function accessoryClickEdit(accessoryID){
   var accessoryEditClass = ".accessoryEditClass";
   var accessoryDeleteClass = ".accessoryDeleteClass";
 
-  accessoryHiddenMode(accessoryEditClass, accessoryDeleteClass, accessoryCheckbox, accessoryInput, accessoryName, accessoryConfirm, accessoryCancel);
+  hiddenMode(accessoryEditClass, accessoryDeleteClass, accessoryCheckbox, accessoryInput, accessoryName, accessoryConfirm, accessoryCancel);
 }
 
 /*programClickEdit funktio käynnistetään käyttäjän klikatessa programEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function programClickEdit(programID){
   var programCheckbox = "#programCheckbox_"+programID;
   var programSpan = "#programSpan_"+programID;
@@ -1650,11 +1579,11 @@ function programClickEdit(programID){
   var programEditClass = ".programEditClass";
   var programDeleteClass = ".programDeleteClass";
 
-  programHiddenMode(programEditClass, programDeleteClass, programCheckbox, programInput, programName, programConfirm, programCancel);
+  hiddenMode(programEditClass, programDeleteClass, programCheckbox, programInput, programName, programConfirm, programCancel);
 }
 
 /*programClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function programClickCancel(programID){
   var programInput = "#programInput_"+programID;
   var programConfirm = "#programConfirm_"+programID;
@@ -1663,11 +1592,11 @@ function programClickCancel(programID){
   var programEditClass = ".programEditClass";
   var programDeleteClass = ".programDeleteClass";
 
-  programOriginalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel);
+  originalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel);
 }
 
 /*programClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function categoryClickCancel(categoryID){
   var categorySpan = "#categorySpan_"+categoryID;
   var categoryInput = "#categoryInput_"+categoryID;
@@ -1676,7 +1605,7 @@ function categoryClickCancel(categoryID){
   var categoryEditClass = ".categoryEditClass";
   var categoryDeleteClass = ".categoryDeleteClass";
 
-  categoryOriginalMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan);
+  originalMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan);
 }
 
 /*statusClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
@@ -1689,7 +1618,7 @@ function statusClickCancel(statusID){
   var statusEditClass = ".statusEditClass";
   var statusDeleteClass = ".statusDeleteClass";
 
-  statusOriginalMode(statusEditClass, statusDeleteClass, statusInput, statusConfirm, statusCancel, statusSpan);
+  originalMode2(statusEditClass, statusDeleteClass, statusInput, statusConfirm, statusCancel, statusSpan);
 }
 
 /*modalAccessoryClickEdit funktio käynnistetään käyttäjän klikatessa modalAccessoryEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
@@ -1704,11 +1633,11 @@ function modalAccessoryClickEdit(accessoryID){
   var modalAccessoryEditClass = ".modalAccessoryEditClass";
   var modalAccessoryDeleteClass = ".modalAccessoryDeleteClass";
 
-  accessoryHiddenMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryCheckbox, modalAccessoryInput, accessoryName, modalAccessoryConfirm, modalAccessoryCancel);
+  hiddenMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryCheckbox, modalAccessoryInput, accessoryName, modalAccessoryConfirm, modalAccessoryCancel);
 }
 
 /*modalProgramClickEdit funktio käynnistetään käyttäjän klikatessa modalProgramEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function modalProgramClickEdit(programID){
   var modalProgramCheckbox = "#modalProgramCheckbox_"+programID;
   var modalProgramSpan = "#modalProgramSpan_"+programID;
@@ -1719,11 +1648,11 @@ function modalProgramClickEdit(programID){
   var modalProgramEditClass = ".modalProgramEditClass";
   var modalProgramDeleteClass = ".modalProgramDeleteClass";
 
-  programHiddenMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramCheckbox, modalProgramInput, programName, modalProgramConfirm, modalProgramCancel);
+  hiddenMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramCheckbox, modalProgramInput, programName, modalProgramConfirm, modalProgramCancel);
 }
 
 /*accessoryClickCancel funktio käynnistetään käyttäjän klikatessa accessoryCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä accessoryOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function accessoryClickCancel(accessoryID){
   var accessoryInput = "#accessoryInput_"+accessoryID;
   var accessoryConfirm = "#accessoryConfirm_"+accessoryID;
@@ -1732,11 +1661,11 @@ function accessoryClickCancel(accessoryID){
   var accessoryEditClass = ".accessoryEditClass";
   var accessoryDeleteClass = ".accessoryDeleteClass";
 
-  accessoryOriginalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
+  originalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
 }
 
 /*modalAccessoryClickCancel funktio käynnistetään käyttäjän klikatessa modalAccessoryCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä accessoryOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function modalAccessoryClickCancel(accessoryID){
   var modalAccessoryInput = "#modalAccessoryInput_"+accessoryID;
   var modalAccessoryConfirm = "#modalAccessoryConfirm_"+accessoryID;
@@ -1745,11 +1674,11 @@ function modalAccessoryClickCancel(accessoryID){
   var modalAccessoryEditClass = ".modalAccessoryEditClass";
   var modalAccessoryDeleteClass = ".modalAccessoryDeleteClass";
 
-  accessoryOriginalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
+  originalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
 }
 
 /*modalProgramClickCancel funktio käynnistetään käyttäjän klikatessa modalProgramCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function modalProgramClickCancel(programID){
   var modalProgramInput = "#modalProgramInput_"+programID;
   var modalProgramConfirm = "#modalProgramConfirm_"+programID;
@@ -1758,11 +1687,11 @@ function modalProgramClickCancel(programID){
   var modalProgramEditClass = ".modalProgramEditClass";
   var modalProgramDeleteClass = ".modalProgramDeleteClass";
 
-  programOriginalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
+  originalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
 }
 
 /*categoryClickEdit funktio käynnistetään käyttäjän klikatessa categoryEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn kategorian ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä categoryHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode2 ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function categoryClickEdit(categoryID){
   var categorySpan = "#categorySpan_"+categoryID;
   var categoryInput = "#categoryInput_"+categoryID;
@@ -1772,11 +1701,11 @@ function categoryClickEdit(categoryID){
   var categoryEditClass = ".categoryEditClass";
   var categoryDeleteClass = ".categoryDeleteClass";
 
-  categoryHiddenMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryName, categoryConfirm, categoryCancel, categorySpan);
+  hiddenMode2(categoryEditClass, categoryDeleteClass, categoryInput, categoryName, categoryConfirm, categoryCancel, categorySpan);
 }
 
 /*statusClickEdit funktio käynnistetään käyttäjän klikatessa statusEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn status ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä statusHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
+  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode2 ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function statusClickEdit(statusID){
   var statusSpan = "#statusSpan_"+statusID;
   var statusInput = "#statusInput_"+statusID;
@@ -1786,7 +1715,7 @@ function statusClickEdit(statusID){
   var statusEditClass = ".statusEditClass";
   var statusDeleteClass = ".statusDeleteClass";
 
-  statusHiddenMode(statusEditClass, statusDeleteClass, statusInput, statusName, statusConfirm, statusCancel, statusSpan);
+  hiddenMode2(statusEditClass, statusDeleteClass, statusInput, statusName, statusConfirm, statusCancel, statusSpan);
 }
 
 /*accessoryClickConfirm funktio käynnistetään käyttäjän klikatessa accessoryConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
@@ -1810,14 +1739,13 @@ function accessoryClickConfirm(accessoryID){
     data: ({accessoryID:accessoryID, accessoryNewName:accessoryNewName}),
     success:function(data){
       $(accessorySpan).text(data.name);
-      showSnackbar(ilmoitukset[13]);
+      showSnackbar"Lisävarustetta muokattu!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
-  accessoryOriginalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
+  originalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
 }
 
 /*modalAccessoryClickConfirm funktio käynnistetään käyttäjän klikatessa modalAccessoryConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
@@ -1843,14 +1771,13 @@ function modalAccessoryClickConfirm(accessoryID){
     success:function(data){
       $(accessorySpan).text(data.name);
       $(modalAccessorySpan).text(data.name);
-      showSnackbar(ilmoitukset[13]);
+      showSnackbar("Lisävarustetta muokattu!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
-  accessoryOriginalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
+  originalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
 }
 
 /*modalProgramClickConfirm funktio käynnistetään käyttäjän klikatessa modalProgramConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
@@ -1876,14 +1803,13 @@ function modalProgramClickConfirm(programID){
     success:function(data){
       $(programSpan).text(data.name);
       $(modalProgramSpan).text(data.name);
-      showSnackbar(ilmoitukset[16]);
+      showSnackbar("Ohjelman muokkaus onnistui!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
-  programOriginalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
+  originalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
 }
 
 /*programClickConfirm funktio käynnistetään käyttäjän klikatessa programConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
@@ -1907,14 +1833,13 @@ function programClickConfirm(programID){
     data: ({programID:programID, programNewName:programNewName}),
     success:function(data){
       $(programSpan).text(data.name);
-      showSnackbar(ilmoitukset[16]);
+      showSnackbar("Ohjelman muokkaus onnistui!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
-  programOriginalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel);
+  originalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel);
 }
 
 /*categoryClickConfirm funktio käynnistetään käyttäjän klikatessa categoryConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
@@ -1941,14 +1866,13 @@ function categoryClickConfirm(categoryID){
       $(categorySpan).text(data.name);
       $(newProductCategory).text(data.name);
       $(filterByCategory).text(data.name);
-      showSnackbar(ilmoitukset[13]);
+      showSnackbar("Kategorian muokkaus onnistui!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
-  categoryOriginalMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan);
+  originalMode2(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan);
 }
 
 /*statusClickConfirm funktio käynnistetään käyttäjän klikatessa statusConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn status ID:n
@@ -1975,97 +1899,52 @@ function statusClickConfirm(statusID){
       $(statusSpan).text(data.status);
       $(newProductStatus).text(data.status);
       $(filterByStatus).text(data.status);
-      showSnackbar(ilmoitukset[13]);
+      showSnackbar("Statuksen muokkaus onnistui!");
     },
     error:function(){
-      console.log("Särki");
     }
   });
   }
   statusOriginalMode(statusEditClass, statusDeleteClass, statusInput, statusConfirm, statusCancel, statusSpan);
 }
 
-/*accessoryOriginalMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function accessoryOriginalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel){
-  $(accessoryDeleteClass).css("display", "block");
-  $(accessoryEditClass).css("display", "block");
-  $(accessoryInput).css("display", "none");
-  $(accessoryConfirm).css("display", "none");
-  $(accessoryCheckbox).css("display", "block");
-  $(accessoryCancel).css("display", "none");
-}
-/*accessoryHiddenMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function accessoryHiddenMode(accessoryEditClass, accessoryDeleteClass, accessoryCheckbox, accessoryInput, accessoryName, accessoryConfirm, accessoryCancel){
-  $(accessoryEditClass).css("display", "none");
-  $(accessoryDeleteClass).css("display", "none");
-  $(accessoryCheckbox).css("display", "none");
-  $(accessoryInput).css("display", "block");
-  $(accessoryInput).val(accessoryName);
-  $(accessoryConfirm).css("display", "block");
-  $(accessoryCancel).css("display", "block");
+
+function hiddenMode(editClass, deleteClass, checkbox, input, name, confirm, cancel){
+  $(editClass).css("display", "none");
+  $(deleteClass).css("display", "none");
+  $(checkbox).css("display", "none");
+  $(input).css("display", "block");
+  $(input).val(name);
+  $(confirm).css("display", "block");
+  $(cancel).css("display", "block");
 }
 
-/*programHiddenMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function programHiddenMode(programEditClass, programDeleteClass, programCheckbox, programInput, programName, programConfirm, programCancel){
-  $(programEditClass).css("display", "none");
-  $(programDeleteClass).css("display", "none");
-  $(programCheckbox).css("display", "none");
-  $(programInput).css("display", "block");
-  $(programInput).val(programName);
-  $(programConfirm).css("display", "block");
-  $(programCancel).css("display", "block");
+function hiddenMode2(editClass, deleteClass, input, name, confirm, cancel, span){
+  $(editClass).css("display", "none");
+  $(span).css("display", "none");
+  $(deleteClass).css("display", "none");
+  $(input).css("display", "block");
+  $(input).val(name);
+  $(confirm).css("display", "block");
+  $(cancel).css("display", "block");
 }
 
-/*categoryHiddenMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function categoryHiddenMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryName, categoryConfirm, categoryCancel, categorySpan){
-  $(categoryEditClass).css("display", "none");
-  $(categorySpan).css("display", "none");
-  $(categoryDeleteClass).css("display", "none");
-  $(categoryInput).css("display", "block");
-  $(categoryInput).val(categoryName);
-  $(categoryConfirm).css("display", "block");
-  $(categoryCancel).css("display", "block");
+function originalMode(editClass, deleteClass, input, confirm, checkbox, cancel){
+  $(deleteClass).css("display", "block");
+  $(editClass).css("display", "block");
+  $(input).css("display", "none");
+  $(confirm).css("display", "none");
+  $(checkbox).css("display", "block");
+  $(cancel).css("display", "none");
 }
 
-/*categoryHiddenMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function statusHiddenMode(statusEditClass, statusDeleteClass, statusInput, statusName, statusConfirm, statusCancel, statusSpan){
-  $(statusEditClass).css("display", "none");
-  $(statusSpan).css("display", "none");
-  $(statusDeleteClass).css("display", "none");
-  $(statusInput).css("display", "block");
-  $(statusInput).val(statusName);
-  $(statusConfirm).css("display", "block");
-  $(statusCancel).css("display", "block");
-}
-
-/*accessoryOriginalMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function categoryOriginalMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan){
-  $(categorySpan).css("display", "block");
-  $(categoryDeleteClass).css("display", "block");
-  $(categoryEditClass).css("display", "block");
-  $(categoryInput).css("display", "none");
-  $(categoryConfirm).css("display", "none");
-  $(categoryCancel).css("display", "none");
-}
-
-/*statusOriginalMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function statusOriginalMode(statusEditClass, statusDeleteClass, statusInput, statusConfirm, statusCancel, statusSpan){
-  $(statusSpan).css("display", "block");
-  $(statusDeleteClass).css("display", "block");
-  $(statusEditClass).css("display", "block");
-  $(statusInput).css("display", "none");
-  $(statusConfirm).css("display", "none");
-  $(statusCancel).css("display", "none");
-}
-
-/*programOriginalMode funktio vastaanottaa sille lähetetyt polut ja piilottaa / näyttää ne*/
-function programOriginalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel){
-  $(programDeleteClass).css("display", "block");
-  $(programEditClass).css("display", "block");
-  $(programInput).css("display", "none");
-  $(programConfirm).css("display", "none");
-  $(programCheckbox).css("display", "block");
-  $(programCancel).css("display", "none");
+function originalMode2(editClass, deleteClass, input, confirm, cancel, span){
+  $(span).css("display", "block");
+  $(deleteClass).css("display", "block");
+  $(editClass).css("display", "block");
+  $(input).css("display", "none");
+  $(confirm).css("display", "none");
+  $(cancel).css("display", "none");
 }
 
 /*deleteCategory funktio käynnistetään kun käyttäjä klikkaa categoryDeleteClass luokalla varustettua painiketta. Funktio vastaanottaa klikatun painikkeen ID:n
@@ -2086,16 +1965,14 @@ function deleteCategory(categoryID){
             $(trCategory).remove();
             $(newProductCategory).remove();
             $(filterByCategory).remove();
-            showSnackbar(ilmoitukset[12]);
+            showSnackbar("Kategoria poistettu!");
           },
           error:function(){
-            console.log("Ei onnistu")
-            showSnackbar(ilmoitukset[31]);
+            showSnackbar("Kategorian poisto epäonnistui!");
           }
         });
   }
   else{
-    console.log("Ei poistettu");
   }
 }
 
@@ -2117,16 +1994,14 @@ function deleteStatus(statusID){
             $(trCategory).remove();
             $(newProductStatus).remove();
             $(filterByStatus).remove();
-            showSnackbar(ilmoitukset[12]);
+            showSnackbar("Statuksen poisto onnistui");
           },
           error:function(){
-            console.log("Ei onnistu")
-            showSnackbar(ilmoitukset[31]);
+            showSnackbar("Statuksen poisto epäonnistui!");
           }
         });
   }
   else{
-    console.log("Ei poistettu");
   }
 }
 
@@ -2157,7 +2032,7 @@ var trElement = $(trPolku);
 $("#rentBasketTable").append(trElement);
 $(addRentBasket).css("display","none");
 $(deleteRentBasket).css("display","block");
-showSnackbar(ilmoitukset[39]);
+showSnackbar("Tuote lisätty lainauskoriin");
 
 $('#rentBasketLabel').html(parseInt($('#rentBasketLabel').html())+1);
 });
@@ -2172,7 +2047,7 @@ $("#rentBasketTable").append(trElement);
 $('#productModal').modal('toggle');
 $(addRentBasket).css("display","none");
 $(deleteRentBasket).css("display","block");
-showSnackbar(ilmoitukset[39]);
+showSnackbar("Tuote lisätty lainauskoriin");
 
 $('#rentBasketLabel').html(parseInt($('#rentBasketLabel').html())+1);
 });
