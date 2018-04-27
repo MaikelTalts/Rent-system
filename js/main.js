@@ -239,7 +239,7 @@ $(document).ready(function(){
 
 //== == == == == == == == == == == == == == == == == == == == == == == LAINAUSKORIN TUOTTEIDEN TARKISTUS == == == == == == == == == == == == == == == == == == == == == == == //
 //Käyttäjän klikatessa painiketta jolla on statusConfirmClass luokka, käynnistetään funktio nimeltä statusClickConfirm, ja lähetetään mukana klikatun painikkeen arvo.
-$('#rent').on('click', function(){
+$(document).on('click', '#rent', function(){
    devices = [];
   $('#rentModal').find('.deleteRentBasket').each(function () {
        devices.push($(this).val());

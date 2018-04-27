@@ -39,17 +39,32 @@ include 'info/rentInfo.php';
 <!-- The actual snackbar -->
 <div id="snackbar"></div>
 
-<!-- Maincontainer alku -->
-<div class="container" id="background" style="padding-top:10px;">
-    <!-- Header jumbotron -->
-    <div class="jumbotron" style="padding:20px;">
-        <h1 id="systemUserID" value="<?php echo $_SESSION['userID']; ?>">Tervetuloa - <?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></h1>
-        <p>SAKKY - Liiketalousyksikön laitteiston lainausjärjestelmä</p>
-        <a href="logout.php" class="btn btn-danger" id="logout">Kirjaudu Ulos</a>
 
-        <button type="button" data-toggle="modal" data-target="#rentModal" class="btn btn-primary float-right" id="rent">Lainauskori <span id="rentBasketLabel" class="badge badge-light">0</span></button>
-        <button type="button"  class="btn btn-info float-right" onclick="openNav()" style="margin-right:20px;">&#9776;</button>
+<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center">
+  <div class="container">
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+            <li class="nav-item">
+                <button type="button" data-toggle="modal" data-target="#rentModal" class="btn btn-primary" id="rent">Lainauskori <span id="rentBasketLabel" class="badge badge-light">0</span></button>
+                <button type="button" style="margin-left:10px;" class="btn btn-primary" onclick="openNav()">&#9776;</button>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item">
+                <a href="logout.php" class="btn btn-danger float-center" id="logout">Kirjaudu Ulos</a>
+            </li>
+        </ul>
     </div>
+    <div>
+</nav>
+
+<!-- Maincontainer alku -->
+<div class="container" id="background" style="padding-top:10px; margin-top:80px;">
+    <!-- Header jumbotron -->
 
     <!-- Navigaatio tabien alku -->
     <div class="row align-items-start">
