@@ -26,12 +26,9 @@
 
     //Poistetaan laina tietokannasta samalla tarkistaen onnistuminen
     if (mysqli_query($mysqli, $query)) {
-      $return_data['msg'] = 'Poisto onnistui 1';
-      $return_data['msg2'] = 'Poisto onnistui 2';
-      echo json_encode($return_data);
+        $return_data = "Laina peruutettu!";
     } else {
-        $return_data['msg'] = 'Poisto epäonnistui';
-        $return_data['msg2'] = 'Poisto epäonnistui2.';
+        $return_data = "Lainan peruutus epäonnistui!";
     }
-
+    echo json_encode($return_data);
 ?>

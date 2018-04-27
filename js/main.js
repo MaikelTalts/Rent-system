@@ -402,10 +402,10 @@ $('#viewRentModal').on('click', '.cancelRent', function(){
       success:function(data){
         $('#viewRentModal').modal("hide");
         $(incomingRentTR).remove();
-        showSnackbar("Laina peruutettu!");
+        showSnackbar(data);
       },
       error:function(){
-        showSnackbar("Lainan peruutus epäonnistui!");
+        showSnackbar(data);
       }
     });
   }
@@ -427,10 +427,10 @@ $('#viewRentModal').on('click', '.deleteRent', function(){
       success:function(data){
         $('#viewRentModal').modal("hide");
         $(oldRentTR).remove();
-        showSnackbar("Lainan poisto onnistui!");
+        showSnackbar(data);
       },
       error:function(){
-        showSnackbar("Lainan poisto epäonnistui");
+        showSnackbar(data);
       }
     });
   }
@@ -877,10 +877,10 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#adminModal').modal("hide");
                         $(adminTR).remove();
-                        showSnackbar("Admin poistettu!");
+                        showSnackbar(data);
                       },
                       error:function(){
-                        showSnackbar("Adminin poisto epäonnistui!");
+                        showSnackbar(data);
                       }
                     });
               }
@@ -904,10 +904,10 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#productModal').modal("hide");
                         $(productTR).remove();
-                        showSnackbar("Laite poistettu!");
+                        showSnackbar(data);
                       },
                       error:function(){
-                        showSnackbar("Laitteen poisto epäonnistui!");
+                        showSnackbar(data);
                       }
                     });
               }
@@ -1502,7 +1502,7 @@ function deleteAccessory(accessoryID, checkID){
           data: {accessoryID:accessoryID},
           success:function(data){
             $(trAccessory).remove();
-            showSnackbar("Lisävaruste poistettu!");
+            showSnackbar(data);
             if(checkID==2){
               $(trModalAccessory).remove();
             }
@@ -1511,7 +1511,7 @@ function deleteAccessory(accessoryID, checkID){
             }
           },
           error:function(){
-            showSnackbar("Lisävarusteen poisto epäonnistui!");
+            showSnackbar(data);
           }
         });
   }
@@ -1534,7 +1534,7 @@ function deleteProgram(programID, checkID){
           data: {programID:programID},
           success:function(data){
             $(trProgram).remove();
-            showSnackbar("Ohjelma poistettu!");
+            showSnackbar(data);
             if(checkID==2){
               $(trModalProgram).remove();
             }
@@ -1543,7 +1543,7 @@ function deleteProgram(programID, checkID){
             }
           },
           error:function(){
-            showSnackbar("Ohjelman poisto epäonnistui");
+            showSnackbar(data);
           }
         });
 
@@ -1965,10 +1965,10 @@ function deleteCategory(categoryID){
             $(trCategory).remove();
             $(newProductCategory).remove();
             $(filterByCategory).remove();
-            showSnackbar("Kategoria poistettu!");
+            showSnackbar(data);
           },
           error:function(){
-            showSnackbar("Kategorian poisto epäonnistui!");
+            showSnackbar(data);
           }
         });
   }
@@ -1994,10 +1994,10 @@ function deleteStatus(statusID){
             $(trCategory).remove();
             $(newProductStatus).remove();
             $(filterByStatus).remove();
-            showSnackbar("Statuksen poisto onnistui");
+            showSnackbar(data);
           },
           error:function(){
-            showSnackbar("Statuksen poisto epäonnistui!");
+            showSnackbar(data);
           }
         });
   }

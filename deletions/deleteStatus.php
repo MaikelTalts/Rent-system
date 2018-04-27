@@ -15,12 +15,9 @@
 
     //Suoritetaan SQL kysely, samalla tarkistaen sen onnistumisen
     if (mysqli_query($mysqli, $query)) {
-      $return_data['msg'] = 'Poisto onnistui 1';
-      $return_data['msg2'] = 'Poisto onnistui 2';
-      echo json_encode($return_data);
+        $return_data = "Statuksen poisto onnistui";
     } else {
-        $return_data['msg'] = 'Poisto epäonnistui';
-        $return_data['msg2'] = 'Poisto epäonnistui2.';
+        $return_data = "Statuksen poisto epäonnistui!";
     }
-
+    echo json_encode($return_data);
 ?>
