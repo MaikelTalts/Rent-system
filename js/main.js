@@ -1739,7 +1739,7 @@ function accessoryClickConfirm(accessoryID){
     data: ({accessoryID:accessoryID, accessoryNewName:accessoryNewName}),
     success:function(data){
       $(accessorySpan).text(data.name);
-      showSnackbar"Lisävarustetta muokattu!");
+      showSnackbar("Lisävarustetta muokattu!");
     },
     error:function(){
     }

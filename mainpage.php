@@ -40,9 +40,9 @@ include 'info/rentInfo.php';
 <div id="snackbar"></div>
 
 
-<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center">
+<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center fixed-top">
   <div class="container">
-    <a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a>
+    <a href="#" class="navbar-brand d-flex w-50 mr-auto"><?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
     </button>
