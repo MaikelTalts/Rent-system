@@ -42,7 +42,7 @@ include 'info/rentInfo.php';
 
 <nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center fixed-top">
   <div class="container">
-    <a href="#" class="navbar-brand d-flex w-50 mr-auto"><?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></a>
+    <a href="#" class="navbar-brand d-flex w-50 mr-auto" id="systemUserID" data-userID="<?php echo $_SESSION['userID']?>"><?php echo $_SESSION['firstName'] . " " . $_SESSION['lastName']; ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
     </button>

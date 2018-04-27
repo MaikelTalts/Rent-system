@@ -251,7 +251,7 @@ $(document).on('click', '#rent', function(){
 /*Käyttäjän klikatessa .createRent luokalla varustettua painiketta, noudetaan valitut lainan alkamis ja loppumispäivät, globaalina muuttujana lainattavat laitteet, lainaaja,
 sekä lainan kirjurin tiedot ja lähetetään ne createRent nimiselle funktiolle, joka suorittaa ajax kutsun tietokantaan.*/
 $('.createRent').on('click', function(){
-    var userID = $("#systemUserID").attr("value");
+    var userID = $("#systemUserID").attr("data-userID");
     var customerID = $('#currentRentCustomer').attr("value");
     var description = $('#newRentDescription').val();
     var fromFin = $('#from').val();
@@ -437,10 +437,10 @@ $('#viewRentModal').on('click', '.deleteRent', function(){
 });
 
 
-
 /*Käyttäjän klikatessa createRent luokalla varustettua painiketta, poimitaan muuttujiin käyttäjän syöttämät ja valitsemat tiedot. Ja suoritetaan ajax pyyntö insertRent.php
 tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
   function createRent(devices, fromUs, toUs, description, customerID, userID){
+    console.log(userID);
     $.ajax({
       type: "POST",
       url: "insertions/insertRent.php",
@@ -848,10 +848,10 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
                       success:function(data){
                         $('#customerModal').modal("hide");
                         $(customerTR).remove();
-                        showSnackbar("Lainaaja poistettu!");
+                        showSnackbar(data);
                       },
                       error:function(){
-                        showSnackbar("Lainaajan poisto epäonnistui!");
+                        showSnackbar(data);
                       }
                     });
               }
@@ -1179,6 +1179,7 @@ function deleteProductFromRent(productID, rentID, checkID){
       else{
         $(modalRentTR).remove();
       }
+      showSnackbar(data);
     },
     error:function(){
     }
