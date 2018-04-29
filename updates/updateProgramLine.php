@@ -19,9 +19,9 @@ include '../server.php';
               WHERE productID = $productID AND programID = $programID;";
 
               if (mysqli_query($mysqli, $query)) {
-                $return_data['response'] = 'Poistettu';
+                $return_data = 'Ohjelma poistettu';
               } else {
-                $return_data['response'] = 'Poisto epäonnistui';
+                $return_data = 'Ohjelman poisto epäonnistui';
               }
   }
   else{
@@ -29,9 +29,9 @@ include '../server.php';
               VALUES ($productID, $programID);";
 
     if (mysqli_query($mysqli, $query)) {
-        $return_data['response'] = 'Lisätty';
+        $return_data = 'Ohjelma lisätty';
     } else {
-        $return_data['response'] = 'Lisäys epäonnistui';
+        $return_data = 'Ohjelman lisäys epäonnistui';
     }
 
   }

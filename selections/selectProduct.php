@@ -108,16 +108,14 @@ if(isset($_POST["deviceID"])) {
                       <table class="table table-bordered" style="margin-bottom:0px;">
                         <thead>
                            <tr>
-                             <th>Lisävaruste</th>
-                             <th><center>Muokkaa</center></th>
-                             <th><center>Poista</center></th>
+                             <th width="90%">Lisävaruste</th>
+                             <th width="10%"><center>Lisää</center></th>
                            </tr>
                         </thead>
                         <tbody class="modalAccessoryList">
                           <tr>
                               <td><input type="text" class="form-control" id="modalNewAccessoryInput"></td>
                               <td style="text-align:center;"><button type="button" class="btn btn-success btn-sm addNewAccessory">Lisää</button></td>
-                              <td></td>
                           </tr>
                           <?php
                           $sql = "SELECT * FROM accessory";
@@ -135,9 +133,12 @@ if(isset($_POST["deviceID"])) {
                                 ?>
                                 <tr id="trModalAccessory_<?php echo $row["accessoryID"] ?>">
                                     <td>
-                                      <input type="text" class="form-control modalAccessoryInputClass" id="modalAccessoryInput_<?php echo $row["accessoryID"] ?>">
+                                        <label><span id="modalAccessorySpan_<?php echo $row["accessoryID"] ?>"><?php echo $row["name"] ?></span></label>
+                                    </td>
+                                    <td>
+                                      <center>
                                         <div class="checkbox accessoryCheckboxClass" id="modalAccessoryCheckbox_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["name"] ?>">
-                                          <label><input type="checkbox" value="<?php echo $row["accessoryID"] ?>" class="modalAccessoryCheckbox"
+                                          <input type="checkbox" value="<?php echo $row["accessoryID"] ?>" class="modalAccessoryCheckbox"
                                                     <?php
                                                     $aLResult = mysqli_query($mysqli, $query);
                                                     if (mysqli_num_rows($aLResult) > 0) {
@@ -149,19 +150,7 @@ if(isset($_POST["deviceID"])) {
                                                     }
                                                     ?>
                                                     >
-                                                <span id="modalAccessorySpan_<?php echo $row["accessoryID"] ?>"><?php echo $row["name"] ?></span></label>
                                         </div>
-                                    </td>
-                                    <td>
-                                      <center>
-                                        <button type="button" class="btn btn-success btn-sm modalAccessoryConfirmClass" id="modalAccessoryConfirm_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Tallenna</button>
-                                        <button type="button" class="btn btn-primary btn-sm modalAccessoryEditClass" value="<?php echo $row["accessoryID"] ?>">Muokkaa</button>
-                                      </center>
-                                    </td>
-                                    <td>
-                                      <center>
-                                        <button type="button" class="btn btn-sm btn-danger modalAccessoryDeleteClass" id="modalAccessoryDelete_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Poista</button>
-                                        <button type="button" class="btn btn-sm btn-primary modalAccessoryCancelClass" id="modalAccessoryCancel_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Peruuta</button>
                                       </center>
                                     </td>
                                 </tr>
@@ -170,7 +159,7 @@ if(isset($_POST["deviceID"])) {
                           }
 
                           else {
-                          echo "Tietokannasta ei löytynyt yhtään laitetta.";
+                          echo "Tietokannasta ei löytynyt yhtään lisävarustetta.";
                           }
                           ?>
                         </tbody>
@@ -194,16 +183,14 @@ if(isset($_POST["deviceID"])) {
                     <table class="table table-bordered" style="margin-bottom:0px;">
                       <thead>
                          <tr>
-                           <th>Ohjelma</th>
-                           <th><center>Muokkaa</center></th>
-                           <th><center>Poista</center></th>
+                           <th width="90%">Ohjelma</th>
+                           <th width="10%"><center>Lisää</center></th>
                          </tr>
                       </thead>
                       <tbody class="modalProgramList">
                         <tr>
                             <td><input type="text" class="form-control" id="modalNewProgramInput"></td>
                             <td style="text-align:center;"><button type="button" class="btn btn-success btn-sm addNewProgram">Lisää</button></td>
-                            <td></td>
                         </tr>
                         <?php
                         $sql = "SELECT * FROM program";
@@ -221,9 +208,13 @@ if(isset($_POST["deviceID"])) {
                               ?>
                               <tr id="trModalProgram_<?php echo $row["programID"] ?>">
                                   <td>
-                                    <input type="text" class="form-control modalProgramInputClass" id="modalProgramInput_<?php echo $row["programID"] ?>">
+
+                                      <label><span id="modalProgramSpan_<?php echo $row["programID"] ?>"><?php echo $row["name"] ?></span></label>
+                                  </td>
+                                  <td>
+                                    <center>
                                       <div class="checkbox programCheckboxClass" id="modalProgramCheckbox_<?php echo $row["programID"] ?>" value="<?php echo $row["name"] ?>">
-                                        <label><input type="checkbox" value="<?php echo $row["programID"] ?>" class="modalProgramCheckbox"
+                                        <input type="checkbox" value="<?php echo $row["programID"] ?>" class="modalProgramCheckbox"
                                                   <?php
                                                   $pLResult = mysqli_query($mysqli, $query);
                                                   if (mysqli_num_rows($pLResult) > 0) {
@@ -235,19 +226,7 @@ if(isset($_POST["deviceID"])) {
                                                   }
                                                   ?>
                                                   >
-                                              <span id="modalProgramSpan_<?php echo $row["programID"] ?>"><?php echo $row["name"] ?></span></label>
                                       </div>
-                                  </td>
-                                  <td>
-                                    <center>
-                                      <button type="button" class="btn btn-success btn-sm modalProgramConfirmClass" id="modalProgramConfirm_<?php echo $row["programID"] ?>" value="<?php echo $row["programID"] ?>">Tallenna</button>
-                                      <button type="button" class="btn btn-primary btn-sm modalProgramEditClass" value="<?php echo $row["programID"] ?>">Muokkaa</button>
-                                    </center>
-                                  </td>
-                                  <td>
-                                    <center>
-                                      <button type="button" class="btn btn-sm btn-danger modalProgramDeleteClass" id="modalProgramDelete_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["programID"] ?>">Poista</button>
-                                      <button type="button" class="btn btn-sm btn-primary modalProgramCancelClass" id="modalProgramCancel_<?php echo $row["programID"] ?>" value="<?php echo $row["programID"] ?>">Peruuta</button>
                                     </center>
                                   </td>
                               </tr>

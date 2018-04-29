@@ -96,16 +96,14 @@
                                             <table class="table table-bordered" style="margin-bottom:0px;">
                                               <thead>
                                                  <tr>
-                                                   <th>Lisävaruste</th>
-                                                   <th><center>Muokkaa</center></th>
-                                                   <th><center>Poista</center></th>
+                                                   <th width="90%">Lisävaruste</th>
+                                                   <th width="10%"><center>Lisää</center></th>
                                                  </tr>
                                               </thead>
                                               <tbody class="accessoryList">
                                                 <tr>
                                                     <td><input type="text" class="form-control" id="newAccessoryInput"></td>
                                                     <td style="text-align:center;"><button type="button" class="btn btn-success btn-sm addNewAccessory">Lisää</button></td>
-                                                    <td></td>
                                                 </tr>
                                                 <?php
                                                 $sql = "SELECT * FROM accessory";
@@ -118,20 +116,13 @@
                                                       <tr id="trAccessory_<?php echo $row["accessoryID"] ?>">
                                                           <td>
                                                             <input type="text" class="form-control accessoryInputClass" id="accessoryInput_<?php echo $row["accessoryID"] ?>">
+                                                                <label><span id="accessorySpan_<?php echo $row["accessoryID"] ?>"><?php echo $row["name"] ?></span></label>
+                                                          </td>
+                                                          <td>
+                                                            <center>
                                                               <div class="checkbox accessoryCheckboxClass" id="accessoryCheckbox_<?php echo $row["accessoryID"] ?>">
-                                                                <label><input type="checkbox" value="<?php echo $row["accessoryID"] ?>" class="accessoryCheckbox">  <span id="accessorySpan_<?php echo $row["accessoryID"] ?>"><?php echo $row["name"] ?></span></label>
+                                                                <input type="checkbox" value="<?php echo $row["accessoryID"] ?>" class="accessoryCheckbox">
                                                               </div>
-                                                          </td>
-                                                          <td>
-                                                            <center>
-                                                              <button type="button" class="btn btn-success btn-sm accessoryConfirmClass" id="accessoryConfirm_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Tallenna</button>
-                                                              <button type="button" class="btn btn-primary btn-sm accessoryEditClass" value="<?php echo $row["accessoryID"] ?>">Muokkaa</button>
-                                                            </center>
-                                                          </td>
-                                                          <td>
-                                                            <center>
-                                                              <button type="button" class="btn btn-sm btn-danger accessoryDeleteClass" id="accessoryDelete_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Poista</button>
-                                                              <button type="button" class="btn btn-sm btn-primary accessoryCancelClass" id="accessoryCancel_<?php echo $row["accessoryID"] ?>" value="<?php echo $row["accessoryID"] ?>">Peruuta</button>
                                                             </center>
                                                           </td>
                                                       </tr>
@@ -161,16 +152,14 @@
                                             <table class="table table-bordered" style="margin-bottom:0px;">
                                               <thead>
                                                  <tr>
-                                                   <th>Ohjelma</th>
-                                                   <th><center>Muokkaa</center></th>
-                                                   <th><center>Poista</center></th>
+                                                   <th width="90%">Ohjelma</th>
+                                                   <th width="10%"><center>Lisää</center></th>
                                                  </tr>
                                               </thead>
                                               <tbody class="programList">
                                                 <tr>
                                                     <td><input type="text" class="form-control" id="newProgramInput"></td>
                                                     <td style="text-align:center;"><button type="button" class="btn btn-success btn-sm addNewProgram">Lisää</button></td>
-                                                    <td></td>
                                                 </tr>
                                                 <?php
                                                 $sql = "SELECT * FROM program";
@@ -184,19 +173,14 @@
                                                           <td>
                                                             <input type="text" class="form-control programInputClass" id="programInput_<?php echo $row["programID"] ?>">
                                                               <div class="checkbox programCheckboxClass" id="programCheckbox_<?php echo $row["programID"] ?>">
-                                                                <label><input type="checkbox" value="<?php echo $row["programID"] ?>" class="programCheckbox">  <span id="programSpan_<?php echo $row["programID"] ?>"><?php echo $row["name"] ?></span></label>
+                                                                <label><span id="programSpan_<?php echo $row["programID"] ?>"><?php echo $row["name"] ?></span></label>
                                                               </div>
                                                           </td>
                                                           <td>
                                                             <center>
-                                                              <button type="button" class="btn btn-success btn-sm programConfirmClass" id="programConfirm_<?php echo $row["programID"] ?>" value="<?php echo $row["programID"] ?>">Tallenna</button>
-                                                              <button type="button" class="btn btn-primary btn-sm programEditClass" value="<?php echo $row["programID"] ?>">Muokkaa</button>
-                                                            </center>
-                                                          </td>
-                                                          <td>
-                                                            <center>
-                                                              <button type="button" class="btn btn-sm btn-danger programDeleteClass" id="programDelete_<?php echo $row["programID"] ?>" value="<?php echo $row["programID"] ?>">Poista</button>
-                                                              <button type="button" class="btn btn-sm btn-primary programCancelClass" id="programCancel_<?php echo $row["programID"] ?>" value="<?php echo $row["programID"] ?>">Peruuta</button>
+                                                              <div class="checkbox programCheckboxClass" id="programCheckbox_<?php echo $row["programID"] ?>">
+                                                                <input type="checkbox" value="<?php echo $row["programID"] ?>" class="programCheckbox">
+                                                              </div>
                                                             </center>
                                                           </td>
                                                       </tr>
@@ -433,7 +417,7 @@
                   <td> <span id="productCategory_<?php echo $row["productID"]?>"><?php echo $row["name"] ?></span></td>
                   <td>
                     <button id="deleteRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-danger deleteRentBasket" value="<?php echo $row["productID"]?>"><i class="fas fa-minus-circle"></i></button>
-                    <button id="addRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-primary addRentBasket" value="<?php echo $row["productID"]?>"><i class="fas fa-plus-circle"></i></i></i></button>
+                    <button id="addRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-primary addRentBasket" value="<?php echo $row["productID"]?>"><i class="fas fa-plus-circle"></i></button>
                   </td>
                 </tr>
                 <?php

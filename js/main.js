@@ -32,22 +32,6 @@ $(document).ready(function(){
       addNewAccessory(accessoryName, 2);
     });
 
-//== == == == == == == == == == == == == == == == == == == == == == == POISTA LISÄVARUSTE == == == == == == == == == == == == == == == == == == == == == == == //
-
-  /*Käyttäjän klikatessa painiketta, jolla on accessoryDeleteClass luokka [deviceTab:n sisällä], käynnistetään funktio nimeltä deleteAccessory, ja lähetetään mukana klikatun painikkeen arvo, sekä tarkistusluku 1.
-    Tarkistusluvulla tarkistetaan monestako paikasta lisävarusteen tulostus poistetaan [Modaali ja deviceTab]*/
-  $('.accessoryList').on("click", ".accessoryDeleteClass", function(){
-    var accessoryID = $(this).attr("value");
-    deleteAccessory(accessoryID, 1);
-  });
-
-  /*Käyttäjän klikatessa painiketta, jolla on accessoryDeleteClass luokka [Modaalin sisällä], käynnistetään funktio nimeltä deleteAccessory, ja lähetetään mukana klikatun painikkeen arvo, sekä tarkistusluku 2.
-    Tarkistusluvulla tarkistetaan monestako paikasta lisävarusteen tulostus poistetaan [Modaali ja deviceTab]*/
-  $('#productDetail').on("click", ".modalAccessoryDeleteClass", function(){
-    var accessoryID = $(this).attr("value");
-    deleteAccessory(accessoryID, 2);
-  });
-
 //== == == == == == == == == == == == == == == == == == == == == == == MUOKKAA LISÄVARUSTETTA == == == == == == == == == == == == == == == == == == == == == == == //
 
   //Käyttäjän klikatessa painiketta jolla on accessoryEditClass luokka, käynnistetään funktio nimeltä accessoryClickEdit, ja lähetetään mukana klikatun painikkeen arvo.
@@ -153,19 +137,6 @@ $(document).ready(function(){
     modalProgramClickConfirm(programID);
   });
 
-//== == == == == == == == == == == == == == == == == == == == == == == PERUUTA OHJELMAN MUUTOS == == == == == == == == == == == == == == == == == == == == == == == //
-  //Käyttäjän klikatessa painiketta jolla on programCancelClass luokka, käynnistetään funktio nimeltä programClickCancel, ja lähetetään mukana klikatun painikkeen arvo.
-  $('.programList').on("click", ".programCancelClass", function(){
-    var programID = $(this).attr("value");
-    programClickCancel(programID);
-  });
-
-  //Käyttäjän klikatessa painiketta jolla on modalProgramCancelClass luokka, käynnistetään funktio nimeltä modalProgramClickCancel, ja lähetetään mukana klikatun painikkeen arvo.
-  $('#productDetail').on("click", ".modalProgramCancelClass", function(){
-    var programID = $(this).attr("value");
-    modalProgramClickCancel(programID);
-  });
-
 //== == == == == == == == == == == == == == == == == == == == == == == LISÄÄ UUSI KATEGORIA == == == == == == == == == == == == == == == == == == == == == == == //
 //Käyttäjän klikatessa painiketta, jolla on addNewCategory luokka käynnistetään funktio nimeltä addNewCategory ja lähetetään mukana käyttäjän syöttämä kategorian nimi.
   $('#categoryAndStatusControl').on("click", ".addNewCategory", function(){
@@ -189,7 +160,7 @@ $(document).ready(function(){
   });
 
 //== == == == == == == == == == == == == == == == == == == == == == == PERUUTA KATEGORIAN MUUTOS == == == == == == == == == == == == == == == == == == == == == == == //
-//Käyttäjän klikatessa painiketta jolla on programCancelClass luokka, käynnistetään funktio nimeltä programClickCancel, ja lähetetään mukana klikatun painikkeen arvo.
+//Käyttäjän klikatessa painiketta jolla on categoryCancelClass luokka, käynnistetään funktio nimeltä programClickCancel, ja lähetetään mukana klikatun painikkeen arvo.
   $('.categoryList').on("click", ".categoryCancelClass", function(){
     var categoryID = $(this).attr("value");
     categoryClickCancel(categoryID);
@@ -537,8 +508,11 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
       dataType: "json",
       data: ({programID:programID, productID:productID}),
       success:function(data){
+        showSnackbar(data);
       },
-      error:function(){
+      error:function(data){
+        console.log(data);
+        showSnackbar(data);
       }
     });
   });
@@ -648,8 +622,8 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
         data: ({productName:productName, serialNumber:serialNumber, barcode:barcode, manufacturer:manufacturer, category:category, status:status, description:description, chkArray:JSON.stringify(chkArray), progArray:JSON.stringify(progArray)}),
         success:function(data){
           $('#deviceTable tr:first').after("<tr id='productTR_"+data.id+"' class='productTr' value='"+data.id+"'><td><span class='pseudolink viewProduct' id='productName_"+data.id+"' value='"+data.id+"'>"+data.productName+"</span> </td><td> <span id='productStatus_"+data.id+"'>"+data.status+"</span></td><td> <span id='productCategory_"+data.id+"'>"+data.category+"</span></td> <td>\
-                                            <button id='deleteRentBasket_"+data.id+"' type='button' class='btn btn-primary deleteRentBasket'  value='"+data.id+"'>Poista</button>\
-                                            <button id='addRentBasket_"+data.id+"' type='button' class='btn btn-primary addRentBasket' value='"+data.id+"'>Koriin</button> </td></tr>");
+                                            <button id='deleteRentBasket_"+data.id+"' type='button' class='btn btn-primary deleteRentBasket' value='"+data.id+"'><i class='fas fa-minus-circle'></i></button>\
+                                            <button id='addRentBasket_"+data.id+"' type='button' class='btn btn-primary addRentBasket' value='"+data.id+"'><i class='fas fa-plus-circle'></i></button></td></tr>");
           showSnackbar("Tuotelisäys onnistui!");
 
         },
@@ -1286,20 +1260,13 @@ function addNewAccessory(accessoryName, checkID){
       $('.accessoryList').append("<tr id='trAccessory_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control accessoryInputClass' id='accessoryInput_"+data.id+"'>\
+                                              <label><span id='accessorySpan_"+data.id+"'>"+data.name+"</span></label>\
+                                        </td>\
+                                        <td>\
+                                          <center>\
                                             <div class='checkbox accessoryCheckboxClass' id='accessoryCheckbox_"+data.id+"'>\
-                                              <label><input type='checkbox' value='"+data.id+"' class='accessoryCheckbox'>  <span id='accessorySpan_"+data.id+"'>"+data.name+"</span></label>\
+                                              <label><input type='checkbox' value='"+data.id+"' class='accessoryCheckbox'></label>\
                                             </div>\
-                                        </td>\
-                                        <td>\
-                                          <center>\
-                                            <button type='button' class='btn btn-success btn-sm accessoryConfirmClass' id='accessoryConfirm_"+data.id+"' value='"+data.id+"'>Tallenna</button>\
-                                            <button type='button' class='btn btn-primary btn-sm accessoryEditClass' value='"+data.id+"'>Muokkaa</button>\
-                                          </center>\
-                                        </td>\
-                                        <td>\
-                                          <center>\
-                                            <button type='button' class='btn btn-sm btn-danger accessoryDeleteClass' id='accessoryDelete_"+data.id+"' value='"+data.id+"'>Poista</button>\
-                                            <button type='button' class='btn btn-sm btn-primary accessoryCancelClass' id='accessoryCancel_"+data.id+"' value='"+data.id+"'>Peruuta</button>\
                                           </center>\
                                         </td>\
                                     </tr>"
@@ -1308,22 +1275,16 @@ function addNewAccessory(accessoryName, checkID){
       $('.modalAccessoryList').append("<tr id='trModalAccessory_"+data.id+"'>\
                                         <td>\
                                           <input type='text' class='form-control accessoryInputClass' id='modalAccessoryInput_"+data.id+"'>\
+                                              <label><span id='modalAccessorySpan_"+data.id+"'>"+data.name+"</span></label>\
+                                        </td>\
+                                        <td>\
+                                          <center>\
                                             <div class='checkbox accessoryCheckboxClass' id='modalAccessoryCheckbox_"+data.id+"'>\
-                                              <label><input type='checkbox' value='"+data.id+"' class='modalAccessoryCheckbox'>  <span id='modalAccessorySpan_"+data.id+"'>"+data.name+"</span></label>\
+                                              <input type='checkbox' value='"+data.id+"' class='modalAccessoryCheckbox'>\
                                             </div>\
-                                        </td>\
-                                        <td>\
-                                          <center>\
-                                            <button type='button' class='btn btn-success btn-sm modalAccessoryConfirmClass' id='modalAccessoryConfirm_"+data.id+"' value='"+data.id+"'>Tallenna</button>\
-                                            <button type='button' class='btn btn-primary btn-sm modalAccessoryEditClass' value='"+data.id+"'>Muokkaa</button>\
                                           </center>\
                                         </td>\
                                         <td>\
-                                          <center>\
-                                            <button type='button' class='btn btn-sm btn-danger modalAccessoryDeleteClass' id='modalAccessoryDelete_"+data.id+"' value='"+data.id+"'>Poista</button>\
-                                            <button type='button' class='btn btn-sm btn-primary modalAccessoryCancelClass' id='modalAccessoryCancel_"+data.id+"' value='"+data.id+"'>Peruuta</button>\
-                                          </center>\
-                                        </td>\
                                     </tr>"
                                   );
     }
@@ -1355,19 +1316,14 @@ function addNewProgram(programName, checkID){
                                         <td>\
                                           <input type='text' class='form-control programInputClass' id='programInput_"+data.id+"'>\
                                             <div class='checkbox programCheckboxClass' id='programCheckbox_"+data.id+"'>\
-                                              <label><input type='checkbox' value='"+data.id+"' class='programCheckbox'>  <span id='programSpan_"+data.id+"'>"+data.name+"</span></label>\
+                                              <label><span id='programSpan_"+data.id+"'>"+data.name+"</span></label>\
                                             </div>\
                                         </td>\
                                         <td>\
                                           <center>\
-                                            <button type='button' class='btn btn-success btn-sm programConfirmClass' id='programConfirm_"+data.id+"' value='"+data.id+"'>Tallenna</button>\
-                                            <button type='button' class='btn btn-primary btn-sm programEditClass' value='"+data.id+"'>Muokkaa</button>\
-                                          </center>\
-                                        </td>\
-                                        <td>\
-                                          <center>\
-                                            <button type='button' class='btn btn-sm btn-danger programDeleteClass' id='programDelete_"+data.id+"' value='"+data.id+"'>Poista</button>\
-                                            <button type='button' class='btn btn-sm btn-primary programCancelClass' id='programCancel_"+data.id+"' value='"+data.id+"'>Peruuta</button>\
+                                            <div class='checkbox programCheckboxClass' id='programCheckbox_"+data.id+"'>\
+                                              <input type='checkbox' value='"+data.id+"' class='programCheckbox'>\
+                                            </div>\
                                           </center>\
                                         </td>\
                                     </tr>"
@@ -1562,21 +1518,6 @@ function deleteProgram(programID, checkID){
   }
 }
 
-/*accessoryClickEdit funktio käynnistetään käyttäjän klikatessa accessoryEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä accessoryHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function accessoryClickEdit(accessoryID){
-  var accessoryCheckbox = "#accessoryCheckbox_"+accessoryID;
-  var accessorySpan = "#accessorySpan_"+accessoryID;
-  var accessoryInput = "#accessoryInput_"+accessoryID;
-  var accessoryName = $(accessorySpan).text();
-  var accessoryConfirm = "#accessoryConfirm_"+accessoryID;
-  var accessoryCancel = "#accessoryCancel_"+accessoryID;
-  var accessoryEditClass = ".accessoryEditClass";
-  var accessoryDeleteClass = ".accessoryDeleteClass";
-
-  hiddenMode(accessoryEditClass, accessoryDeleteClass, accessoryCheckbox, accessoryInput, accessoryName, accessoryConfirm, accessoryCancel);
-}
-
 /*programClickEdit funktio käynnistetään käyttäjän klikatessa programEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
   suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function programClickEdit(programID){
@@ -1592,20 +1533,7 @@ function programClickEdit(programID){
   hiddenMode(programEditClass, programDeleteClass, programCheckbox, programInput, programName, programConfirm, programCancel);
 }
 
-/*programClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function programClickCancel(programID){
-  var programInput = "#programInput_"+programID;
-  var programConfirm = "#programConfirm_"+programID;
-  var programCheckbox = "#programCheckbox_"+programID;
-  var programCancel = "#programCancel_"+programID;
-  var programEditClass = ".programEditClass";
-  var programDeleteClass = ".programDeleteClass";
-
-  originalMode(programEditClass, programDeleteClass, programInput, programConfirm, programCheckbox, programCancel);
-}
-
-/*programClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
+/*programClickCancel funktio käynnistetään käyttäjän klikatessa categoryCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
   suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function categoryClickCancel(categoryID){
   var categorySpan = "#categorySpan_"+categoryID;
@@ -1618,7 +1546,7 @@ function categoryClickCancel(categoryID){
   originalMode(categoryEditClass, categoryDeleteClass, categoryInput, categoryConfirm, categoryCancel, categorySpan);
 }
 
-/*statusClickCancel funktio käynnistetään käyttäjän klikatessa programCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
+/*statusClickCancel funktio käynnistetään käyttäjän klikatessa statusCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
   suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä programOriginalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
 function statusClickCancel(statusID){
   var statusSpan = "#statusSpan_"+statusID;
@@ -1629,75 +1557,6 @@ function statusClickCancel(statusID){
   var statusDeleteClass = ".statusDeleteClass";
 
   originalMode2(statusEditClass, statusDeleteClass, statusInput, statusConfirm, statusCancel, statusSpan);
-}
-
-/*modalAccessoryClickEdit funktio käynnistetään käyttäjän klikatessa modalAccessoryEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä accessoryHiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function modalAccessoryClickEdit(accessoryID){
-  var modalAccessoryCheckbox = "#modalAccessoryCheckbox_"+accessoryID;
-  var modalAccessorySpan = "#modalAccessorySpan_"+accessoryID;
-  var modalAccessoryInput = "#modalAccessoryInput_"+accessoryID;
-  var accessoryName = $(modalAccessorySpan).text();
-  var modalAccessoryConfirm = "#modalAccessoryConfirm_"+accessoryID;
-  var modalAccessoryCancel = "#modalAccessoryCancel_"+accessoryID;
-  var modalAccessoryEditClass = ".modalAccessoryEditClass";
-  var modalAccessoryDeleteClass = ".modalAccessoryDeleteClass";
-
-  hiddenMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryCheckbox, modalAccessoryInput, accessoryName, modalAccessoryConfirm, modalAccessoryCancel);
-}
-
-/*modalProgramClickEdit funktio käynnistetään käyttäjän klikatessa modalProgramEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä hiddenMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function modalProgramClickEdit(programID){
-  var modalProgramCheckbox = "#modalProgramCheckbox_"+programID;
-  var modalProgramSpan = "#modalProgramSpan_"+programID;
-  var modalProgramInput = "#modalProgramInput_"+programID;
-  var programName = $(modalProgramSpan).text();
-  var modalProgramConfirm = "#modalProgramConfirm_"+programID;
-  var modalProgramCancel = "#modalProgramCancel_"+programID;
-  var modalProgramEditClass = ".modalProgramEditClass";
-  var modalProgramDeleteClass = ".modalProgramDeleteClass";
-
-  hiddenMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramCheckbox, modalProgramInput, programName, modalProgramConfirm, modalProgramCancel);
-}
-
-/*accessoryClickCancel funktio käynnistetään käyttäjän klikatessa accessoryCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function accessoryClickCancel(accessoryID){
-  var accessoryInput = "#accessoryInput_"+accessoryID;
-  var accessoryConfirm = "#accessoryConfirm_"+accessoryID;
-  var accessoryCheckbox = "#accessoryCheckbox_"+accessoryID;
-  var accessoryCancel = "#accessoryCancel_"+accessoryID;
-  var accessoryEditClass = ".accessoryEditClass";
-  var accessoryDeleteClass = ".accessoryDeleteClass";
-
-  originalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
-}
-
-/*modalAccessoryClickCancel funktio käynnistetään käyttäjän klikatessa modalAccessoryCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function modalAccessoryClickCancel(accessoryID){
-  var modalAccessoryInput = "#modalAccessoryInput_"+accessoryID;
-  var modalAccessoryConfirm = "#modalAccessoryConfirm_"+accessoryID;
-  var modalAccessoryCheckbox = "#modalAccessoryCheckbox_"+accessoryID;
-  var modalAccessoryCancel = "#modalAccessoryCancel_"+accessoryID;
-  var modalAccessoryEditClass = ".modalAccessoryEditClass";
-  var modalAccessoryDeleteClass = ".modalAccessoryDeleteClass";
-
-  originalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
-}
-
-/*modalProgramClickCancel funktio käynnistetään käyttäjän klikatessa modalProgramCancelClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, sekä luokkapolutuksia, käynnistää toisen funktion nimeltä originalMode ja lähettää mukana kaikki luomansa id ja luokkapolut.*/
-function modalProgramClickCancel(programID){
-  var modalProgramInput = "#modalProgramInput_"+programID;
-  var modalProgramConfirm = "#modalProgramConfirm_"+programID;
-  var modalProgramCheckbox = "#modalProgramCheckbox_"+programID;
-  var modalProgramCancel = "#modalProgramCancel_"+programID;
-  var modalProgramEditClass = ".modalProgramEditClass";
-  var modalProgramDeleteClass = ".modalProgramDeleteClass";
-
-  originalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
 }
 
 /*categoryClickEdit funktio käynnistetään käyttäjän klikatessa categoryEditClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn kategorian ID:n
@@ -1756,70 +1615,6 @@ function accessoryClickConfirm(accessoryID){
   });
   }
   originalMode(accessoryEditClass, accessoryDeleteClass, accessoryInput, accessoryConfirm, accessoryCheckbox, accessoryCancel);
-}
-
-/*modalAccessoryClickConfirm funktio käynnistetään käyttäjän klikatessa modalAccessoryConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn lisävarusteen ID:n
-  suorittaa ID polutuksia, luokkapolutuksia, noutaa klikatun painikkeen kanssa samalla rivillä olevasta tekstikentästä käyttäjän muuttaman lisävarusteen nimen, käynnistää ajax kutsun
-  updateAccessory.php tiedostolle ja lähettää mukana lisävarusteen ID:n sekä muutetun nimen. updateAccessory päivittää accessory tietokantataulussa vastaanotetun ID:n lisävarusteen
-  nimen lähetetyn mukaiseksi. Onnistunut ajax kutsu muuttaa lisävaruste pudotuspaneelissa näkyvän lisävarusteen nimen.*/
-function modalAccessoryClickConfirm(accessoryID){
-  var modalAccessoryInput = "#modalAccessoryInput_"+accessoryID;
-  var accessorySpan = "#accessorySpan_"+accessoryID;
-  var modalAccessorySpan = "#modalAccessorySpan_"+accessoryID;
-  var accessoryNewName = $(modalAccessoryInput).val();
-  var modalAccessoryConfirm = "#modalAccessoryConfirm_"+accessoryID;
-  var modalAccessoryCheckbox = "#modalAccessoryCheckbox_"+accessoryID;
-  var modalAccessoryCancel = "#modalAccessoryCancel_"+accessoryID;
-  var modalAccessoryEditClass = ".modalAccessoryEditClass";
-  var modalAccessoryDeleteClass = ".modalAccessoryDeleteClass";
-  if(!accessoryNewName==null || !accessoryNewName == ""){
-  $.ajax({
-    type: "POST",
-    url: "updates/updateAccessory.php",
-    dataType: "json",
-    data: ({accessoryID:accessoryID, accessoryNewName:accessoryNewName}),
-    success:function(data){
-      $(accessorySpan).text(data.name);
-      $(modalAccessorySpan).text(data.name);
-      showSnackbar("Lisävarustetta muokattu!");
-    },
-    error:function(){
-    }
-  });
-  }
-  originalMode(modalAccessoryEditClass, modalAccessoryDeleteClass, modalAccessoryInput, modalAccessoryConfirm, modalAccessoryCheckbox, modalAccessoryCancel);
-}
-
-/*modalProgramClickConfirm funktio käynnistetään käyttäjän klikatessa modalProgramConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
-  suorittaa ID polutuksia, luokkapolutuksia, noutaa klikatun painikkeen kanssa samalla rivillä olevasta tekstikentästä käyttäjän muuttaman ohjelman nimen, käynnistää ajax kutsun
-  updateProgram.php tiedostolle ja lähettää mukana ohjelman ID:n sekä muutetun nimen. updateProgram päivittää program tietokantataulussa vastaanotetun ID:n ohjelman
-  nimen lähetetyn mukaiseksi. Onnistunut ajax kutsu muuttaa ohjelma pudotuspaneelissa näkyvän ohjelman nimen.*/
-function modalProgramClickConfirm(programID){
-  var modalProgramInput = "#modalProgramInput_"+programID;
-  var programSpan = "#programSpan_"+programID;
-  var modalProgramSpan = "#modalProgramSpan_"+programID;
-  var programNewName = $(modalProgramInput).val();
-  var modalProgramConfirm = "#modalProgramConfirm_"+programID;
-  var modalProgramCheckbox = "#modalProgramCheckbox_"+programID;
-  var modalProgramCancel = "#modalProgramCancel_"+programID;
-  var modalProgramEditClass = ".modalProgramEditClass";
-  var modalProgramDeleteClass = ".modalProgramDeleteClass";
-  if(!programNewName==null || !programNewName == ""){
-  $.ajax({
-    type: "POST",
-    url: "updates/updateProgram.php",
-    dataType: "json",
-    data: ({programID:programID, programNewName:programNewName}),
-    success:function(data){
-      $(programSpan).text(data.name);
-      $(modalProgramSpan).text(data.name);
-      showSnackbar("Ohjelman muokkaus onnistui!");
-    },
-    error:function(){
-    }
-  });
-  }
-  originalMode(modalProgramEditClass, modalProgramDeleteClass, modalProgramInput, modalProgramConfirm, modalProgramCheckbox, modalProgramCancel);
 }
 
 /*programClickConfirm funktio käynnistetään käyttäjän klikatessa programConfirmClass luokalla varustettua painiketta, funktio vastaanottaa sille lähetetyn ohjelman ID:n
