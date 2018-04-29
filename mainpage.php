@@ -80,9 +80,9 @@ include 'info/rentInfo.php';
                 <a class="nav-link" data-toggle="tab" href="#rents" role="tab">Lainaukset</a>
               </li>
               <?php if($_SESSION['user_email']=='user@testi.com'){?>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#admin" role="tab">Admin</a>
-              </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Asetukset</a>
+                </li>
               <?php
             }?>
             </ul>
@@ -98,12 +98,12 @@ include 'info/rentInfo.php';
                   <div class="tab-content">
                     <!-- Laitteet välilehden sisältö -->
                     <?php include 'tabs/productTab.php'?>
-                    <!-- Admin välilehden sisältö -->
-                    <?php include 'tabs/adminTab.php' ?>
                     <!-- Lainaajat välilehden sisältö -->
                     <?php include 'tabs/customerTab.php'?>
                     <!-- Lainat välilehden sisältö -->
                     <?php include 'tabs/rentsTab.php' ?>
+                    <!-- Lainaajat välilehden sisältö -->
+                    <?php include 'tabs/settingsTab.php'?>
                   </div>
               </div>
       </div>
