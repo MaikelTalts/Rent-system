@@ -432,8 +432,8 @@
                   <td> <span id="productStatus_<?php echo $row["productID"]?>"><?php echo $row["status"] ?></span></td>
                   <td> <span id="productCategory_<?php echo $row["productID"]?>"><?php echo $row["name"] ?></span></td>
                   <td>
-                    <button id="deleteRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-danger deleteRentBasket" value="<?php echo $row["productID"]?>">Poista</button>
-                    <button id="addRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-primary addRentBasket" value="<?php echo $row["productID"]?>">Koriin</button>
+                    <button id="deleteRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-danger deleteRentBasket" value="<?php echo $row["productID"]?>"><i class="fas fa-minus-circle"></i></button>
+                    <button id="addRentBasket_<?php echo $row["productID"]?>" type="button" class="btn btn-primary addRentBasket" value="<?php echo $row["productID"]?>"><i class="fas fa-plus-circle"></i></i></i></button>
                   </td>
                 </tr>
                 <?php

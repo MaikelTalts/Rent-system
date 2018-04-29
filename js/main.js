@@ -548,18 +548,13 @@ tiedostolle, joka luo lainauksen käyttäjän antamien tietojen mukaisesti  */
   Tiedostolle lähetetään klikatun laitteen ID, ja tämä lähettää ajax palautteena modaalin, joka sisältää kaiken tiedon klikatusta laitteesta (tekstikentissä) ja pudotusvalikoissa.*/
     $('#deviceTable').on("click",".viewProduct", function(){
       var deviceValue = $(this).attr("value");
+      viewProduct(deviceValue)
+    });
 
-      $.ajax({
-        type: "POST",
-        url: "selections/selectProduct.php",
-        data: {deviceID:deviceValue},
-        success:function(data){
-          $('#productDetail').html(data);
-          $('#productModal').modal("show");
-        },
-        error:function(){
-        }
-      });
+    $('#rentModal').on('click', '.viewProduct', function(){
+      var deviceValue = $(this).attr("value");
+      $('#rentModal').modal('toggle');
+      viewProduct(deviceValue);
     });
 
 // == == == == == == == == == == == == == == == == == == == == == == == == == == == LAINAAJAN MUOKKAUS MODAALI == == == == == == == == == == == == == == == == == == == == == == == == == == == //
@@ -1081,6 +1076,20 @@ function customerSearch() {
 //== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == //
 //== == == == == == == == == == == == == == == == == == == == == == == == == == FUNKTIOT == == == == == == == == == == == == == == == == == == == == == == == == == //
 //== == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == //
+
+function viewProduct(deviceValue){
+  $.ajax({
+    type: "POST",
+    url: "selections/selectProduct.php",
+    data: {deviceID:deviceValue},
+    success:function(data){
+      $('#productDetail').html(data);
+      $('#productModal').modal("show");
+    },
+    error:function(){
+    }
+  });
+}
 
 function createNewCustomer(firstName, lastName, phoneNumber, email, classID){
   if((!firstName==null || !firstName == "") && (!lastName==null || !lastName == "")){

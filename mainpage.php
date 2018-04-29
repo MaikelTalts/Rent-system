@@ -79,7 +79,7 @@ include 'info/rentInfo.php';
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#rents" role="tab">Lainaukset</a>
               </li>
-              <?php if($_SESSION['user_email']=='testi@passu.com'){?>
+              <?php if($_SESSION['user_email']=='user@testi.com'){?>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#admin" role="tab">Admin</a>
               </li>
